@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TĀRĀ · the sky knows you</title>
+<meta name="description" content="A daily reading written for you, made from your real birth chart, in words that feel human. No jargon. Just you.">
+<meta property="og:title" content="TĀRĀ · the sky knows you">
+<meta property="og:description" content="A daily reading written for you, made from your real birth chart, in words that feel human.">
+<meta property="og:image" content="og-image.png">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg0:#0d1033; --bg1:#171049; --bg2:#38102f;
+    --panel:#1b0f30; --panel2:#1c1440;
+    --border:#3a2d6b; --border-soft:#2c2050;
+    --text:#f4ecff; --text2:#d8c9f2; --muted:#9a8ec2;
+    --gold:#f2b035; --cyan:#27e6ff; --pink:#ff3d9a; --purple:#c9a0ff; --green:#3ddc97;
+    --disp:'Unbounded',sans-serif; --body:'Space Grotesk',sans-serif; --mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body); color:var(--text);
+    background:linear-gradient(178deg, var(--bg0) 0%, var(--bg1) 42%, var(--bg2) 100%) fixed;
+    overflow-x:hidden;
+  }
+  a{color:inherit}
+  ::selection{background:var(--gold);color:var(--bg0)}
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed; inset:0 0 auto 0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 26px;
+    background:linear-gradient(180deg, rgba(13,16,51,.85), rgba(13,16,51,0));
+    backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+  }
+  .wordmark{
+    font-family:var(--disp); font-weight:900; font-size:20px; letter-spacing:.42em;
+    text-shadow:0 0 22px rgba(201,160,255,.55); text-decoration:none;
+  }
+  .head-right{display:flex; align-items:center; gap:14px}
+  .langs{display:flex; border:1.5px solid var(--border); border-radius:99px; overflow:hidden}
+  .langs button{
+    font-family:var(--mono); font-size:11px; letter-spacing:.08em; padding:7px 12px;
+    background:none; border:none; color:var(--muted); cursor:pointer; transition:color .2s;
+  }
+  .langs button.on{color:var(--gold)}
+  .cta, .cta:visited{
+    font-family:var(--body); font-weight:700; font-size:13.5px; text-decoration:none;
+    color:var(--gold); border:2px solid var(--gold); border-radius:99px;
+    padding:9px 20px; background:rgba(242,176,53,.08); transition:background .25s, transform .25s;
+    display:inline-block;
+  }
+  .cta:hover{background:rgba(242,176,53,.2); transform:translateY(-1px)}
+  .cta.big{font-size:16px; padding:14px 34px}
+  .cta.fill{background:var(--gold); color:var(--bg0)}
+  .cta.fill:hover{background:#f7c565}
+  @media(max-width:560px){ .head-right .cta{display:none} }
+
+  /* ---------- hero ---------- */
+  #hero{
+    min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:96px 24px 48px; position:relative;
+  }
+  #hero h1{
+    font-family:var(--disp); font-weight:900; font-size:clamp(34px,7vw,72px);
+    letter-spacing:.02em; line-height:1.12; max-width:14ch; text-wrap:balance;
+  }
+  #hero h1 .cursor{
+    display:inline-block; width:.08em; height:1em; background:var(--gold);
+    vertical-align:-0.12em; margin-left:.06em; animation:blink 1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0}}
+  #hero p{
+    margin-top:22px; font-size:clamp(15px,2.2vw,19px); line-height:1.6; color:var(--text2); max-width:52ch;
+  }
+  #hero .cta{margin-top:34px}
+  .scroll-hint{
+    position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
+    font-family:var(--mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted);
+    animation:bob 2.4s ease-in-out infinite;
+  }
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+  /* ---------- journey (scroll story) ---------- */
+  #journey{position:relative; height:520svh}
+  .stage{
+    position:sticky; top:0; height:100svh; overflow:hidden;
+  }
+  #sky{position:absolute; inset:0; width:100%; height:100%; display:block}
+  .caption{
+    position:absolute; left:50%; transform:translateX(-50%);
+    bottom:12svh; width:min(620px, 88vw); text-align:center;
+    opacity:0; transition:opacity .4s; pointer-events:none;
+  }
+  .caption h2{
+    font-family:var(--disp); font-weight:700; font-size:clamp(19px,3.4vw,30px); line-height:1.35;
+    text-wrap:balance;
+  }
+  .caption p{margin-top:10px; font-size:clamp(14px,2vw,17px); line-height:1.6; color:var(--text2)}
+  .caption .k{color:var(--gold)}
+  .caption .k2{color:var(--cyan)}
+  .caption .k3{color:var(--pink)}
+
+  /* phone that materializes at the end of the journey, with a live mini sky */
+  #phone{
+    position:absolute; left:50%; top:50%;
+    width:min(280px,62vw); aspect-ratio:9/19;
+    transform:translate(-50%,-50%) scale(.92); opacity:0; transition:opacity .5s, transform .5s;
+    border:3px solid var(--purple); border-radius:38px;
+    background:linear-gradient(178deg,#0d1033,#171049 55%,#2a0f2e);
+    box-shadow:0 0 60px rgba(201,160,255,.28), 0 30px 80px rgba(0,0,0,.5);
+    padding:16px 14px; overflow:hidden;
+  }
+  #phone.show{opacity:1; transform:translate(-50%,-50%) scale(1)}
+  #phone .p-notch{width:64px;height:8px;border-radius:9px;background:var(--border-soft);margin:0 auto 10px}
+  #phone .p-mark{font-family:var(--disp);font-weight:900;font-size:15px;letter-spacing:.4em;text-align:center;text-shadow:0 0 14px rgba(201,160,255,.6)}
+  #phone .p-sub{font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;color:var(--muted);text-align:center;margin-top:5px;text-transform:uppercase}
+
+  .mini-sky{display:block; width:78%; margin:6px auto 0}
+  .ms-ring-outer{transform-box:fill-box; transform-origin:center; animation:msSpin 40s linear infinite}
+  .ms-ring-inner{transform-box:fill-box; transform-origin:center; animation:msSpin 28s linear infinite reverse}
+  @keyframes msSpin{to{transform:rotate(360deg)}}
+  .ms-sun-spin{transform-box:fill-box; transform-origin:center; animation:msSway 3.1s ease-in-out infinite}
+  .ms-moon-spin{transform-box:fill-box; transform-origin:center; animation:msSway 3.6s ease-in-out infinite reverse}
+  @keyframes msSway{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+  .ms-tw{animation:msTwinkle 1.6s ease-in-out infinite}
+  .ms-tw2{animation-delay:.5s} .ms-tw3{animation-delay:.9s}
+  @keyframes msTwinkle{0%,100%{opacity:.25}50%{opacity:1}}
+
+  .p-label{margin-top:8px; text-align:center}
+  .p-label .star{color:var(--gold); font-size:15px}
+  .p-label h4{font-family:var(--disp);font-weight:700;font-size:12px; margin-top:2px}
+  .p-label p{font-family:var(--mono);font-size:8px;color:var(--text2);margin-top:4px;letter-spacing:.06em}
+  .p-chips{display:flex;justify-content:center;gap:6px;margin-top:12px;flex-wrap:wrap}
+  .p-chip{font-family:var(--mono);font-size:7.5px;letter-spacing:.08em;padding:5px 9px;border-radius:99px;border:1.5px solid}
+  .p-chip:nth-child(1){color:var(--purple);border-color:var(--purple)}
+  .p-chip:nth-child(2){color:var(--pink);border-color:var(--pink)}
+  .p-chip:nth-child(3){color:var(--cyan);border-color:var(--cyan)}
+  .p-chip:nth-child(4){color:var(--gold);border-color:var(--gold)}
+  .p-chip:nth-child(5){color:var(--green);border-color:var(--green)}
+
+  /* ---------- sections ---------- */
+  section.block{padding:110px 24px; max-width:1060px; margin:0 auto}
+  .eyebrow{font-family:var(--mono); font-size:11.5px; letter-spacing:.26em; text-transform:uppercase; color:var(--gold); margin-bottom:16px}
+  .block h2.title{font-family:var(--disp); font-weight:700; font-size:clamp(24px,4.4vw,40px); line-height:1.25; max-width:22ch; text-wrap:balance}
+  .block p.lead{margin-top:16px; font-size:clamp(15px,2vw,18px); line-height:1.7; color:var(--text2); max-width:60ch}
+
+  /* organic "sticker" cards, same asymmetric corners as the app's gateway cards */
+  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:22px; margin-top:44px}
+  .card{
+    border:2.5px solid var(--border); border-radius:46px 54px 32px 26px;
+    background:rgba(27,15,48,.55);
+    padding:28px 24px; transition:transform .3s, border-color .3s, box-shadow .3s;
+  }
+  .card:nth-child(odd){transform:rotate(-1deg)}
+  .card:nth-child(even){transform:rotate(1deg)}
+  .card:hover{transform:translateY(-6px) rotate(0deg)}
+  .card.gold:hover{border-color:var(--gold); box-shadow:0 14px 40px rgba(242,176,53,.14)}
+  .card.cyan:hover{border-color:var(--cyan); box-shadow:0 14px 40px rgba(39,230,255,.14)}
+  .card.pink:hover{border-color:var(--pink); box-shadow:0 14px 40px rgba(255,61,154,.14)}
+  .card .icon{width:44px; height:44px}
+  .card h3{font-family:var(--disp); font-weight:700; font-size:17px; margin-top:16px; line-height:1.35}
+  .card p{margin-top:12px; font-size:14.5px; line-height:1.65; color:var(--text2)}
+  .card .tag{display:inline-block; margin-top:14px; font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase}
+  .card.gold .tag{color:var(--gold)} .card.cyan .tag{color:var(--cyan)} .card.pink .tag{color:var(--pink)}
+
+  /* icon sway, same idea as the loading-icon animation in the app */
+  .icon-sway{transform-box:fill-box; transform-origin:center; animation:iconSway 2.6s ease-in-out infinite}
+  @keyframes iconSway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+  .icon-spin{transform-box:fill-box; transform-origin:center; animation:msSpin 22s linear infinite}
+
+  /* steps, same card language as features (not a corporate dotted timeline) */
+  .steps{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:22px; margin-top:44px}
+  .step{
+    border:2.5px solid var(--border); border-radius:32px 26px 54px 46px;
+    background:rgba(27,15,48,.55); padding:26px 22px;
+  }
+  .step:nth-child(1){transform:rotate(1deg)}
+  .step:nth-child(2){transform:rotate(-1deg)}
+  .step:nth-child(3){transform:rotate(1deg)}
+  .step .icon{width:40px; height:40px}
+  .step h3{font-family:var(--disp); font-weight:700; font-size:15.5px; margin-top:14px}
+  .step p{margin-top:10px; font-size:14.5px; line-height:1.65; color:var(--text2)}
+
+  /* reading quote */
+  .quote{
+    margin-top:44px; border:2.5px solid var(--purple); border-radius:44px 30px 44px 30px;
+    background:rgba(28,20,64,.6); padding:38px 34px; position:relative; overflow:hidden;
+  }
+  .quote::before{
+    content:'“'; position:absolute; top:-30px; left:16px; font-family:var(--disp);
+    font-size:150px; color:rgba(201,160,255,.16); line-height:1;
+  }
+  .quote blockquote{font-size:clamp(15.5px,2.1vw,18.5px); line-height:1.8; color:var(--text); max-width:62ch; font-weight:500}
+  .quote figcaption{margin-top:18px; font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--muted); text-transform:uppercase}
+
+  /* plus */
+  .plusbox{
+    margin-top:44px; border:2.5px solid var(--gold); border-radius:44px 30px 44px 30px;
+    background:linear-gradient(120deg, rgba(242,176,53,.09), rgba(255,61,154,.06));
+    display:flex; flex-wrap:wrap; gap:26px; align-items:center; justify-content:space-between;
+    padding:36px 32px;
+  }
+  .plusbox h3{font-family:var(--disp); font-weight:700; font-size:clamp(18px,3vw,24px)}
+  .plusbox p{margin-top:10px; color:var(--text2); font-size:15px; line-height:1.65; max-width:46ch}
+  .plusbox .price{font-family:var(--mono); font-size:13px; color:var(--gold); margin-top:12px; letter-spacing:.08em}
+
+  /* final cta */
+  #final{
+    text-align:center; padding:130px 24px 120px; position:relative;
+  }
+  #final h2{font-family:var(--disp); font-weight:900; font-size:clamp(26px,5vw,46px); line-height:1.25; text-wrap:balance}
+  #final p{margin-top:16px; color:var(--text2); font-size:17px}
+  #final .cta{margin-top:34px}
+
+  footer{
+    border-top:1px solid var(--border-soft); padding:36px 26px; display:flex; flex-wrap:wrap;
+    gap:16px; align-items:center; justify-content:space-between; max-width:1060px; margin:0 auto;
+  }
+  footer .fmark{font-family:var(--disp); font-weight:700; letter-spacing:.3em; font-size:13px}
+  footer .fnote{font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.06em}
+
+  /* reveal on scroll */
+  .rv{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease}
+  .rv.in{opacity:1; transform:none}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none!important; transition:none!important}
+    html{scroll-behavior:auto}
+    .rv{opacity:1; transform:none}
+    #journey{height:auto}
+    .stage{position:static; height:auto; min-height:70svh}
+    .caption{position:static; transform:none; opacity:1!important; margin:30px auto; pointer-events:auto}
+    #phone{position:static; transform:none; opacity:1; margin:40px auto}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="wordmark" href="#hero">TĀRĀ</a>
+  <div class="head-right">
+    <nav class="langs" aria-label="Language">
+      <button data-lang="en">EN</button>
+      <button data-lang="sr">SR</button>
+      <button data-lang="de">DE</button>
+    </nav>
+    <a class="cta" data-i18n="try" href="https://tara.expo.app">Try TĀRĀ free</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <h1><span id="type"></span><span class="cursor" aria-hidden="true"></span></h1>
+  <p data-i18n="heroSub">A daily reading written for you, made from your real birth chart, in words that feel human.</p>
+  <a class="cta big fill" data-i18n="tryBig" href="https://tara.expo.app">Open TĀRĀ, it's free</a>
+  <div class="scroll-hint" data-i18n="scrollHint">scroll to let the sky unfold</div>
+</section>
+
+<!-- JOURNEY -->
+<div id="journey">
+  <div class="stage">
+    <canvas id="sky" aria-hidden="true"></canvas>
+
+    <div class="caption" id="cap1">
+      <h2 data-i18n="cap1h">It begins the moment you were born.</h2>
+      <p data-i18n="cap1p">The sky above held a pattern that belongs only to you. Not a horoscope for millions. <em>Yours.</em></p>
+    </div>
+
+    <div class="caption" id="cap2">
+      <h2><span data-i18n="cap2h">TĀRĀ reads that pattern:</span> <span class="k2" data-i18n="cap2k">the real astronomy of it.</span></h2>
+      <p data-i18n="cap2p">Precise positions, ancient Jyotish wisdom, computed for your exact minute and place of birth.</p>
+    </div>
+
+    <div class="caption" id="cap3">
+      <h2><span data-i18n="cap3h">…and turns it into words a friend would say.</span></h2>
+      <p data-i18n="cap3p"><span class="k">No jargon.</span> <span class="k3">No planets to decode.</span> Just you, seen clearly.</p>
+    </div>
+
+    <div id="phone" aria-hidden="true">
+      <div class="p-notch"></div>
+      <div class="p-mark">TĀRĀ</div>
+      <div class="p-sub" data-i18n="phoneSub">the sky knows you</div>
+
+      <svg class="mini-sky" viewBox="0 0 240 240">
+        <defs>
+          <mask id="msMoonMask">
+            <circle cx="0" cy="0" r="19" fill="#fff"/>
+            <circle cx="-7" cy="0" r="16" fill="#000"/>
+          </mask>
+        </defs>
+        <g class="ms-ring-outer"><circle cx="120" cy="120" r="96" fill="none" stroke="var(--purple)" stroke-width="2.5" opacity="0.85"/></g>
+        <g class="ms-ring-inner"><circle cx="120" cy="120" r="70" fill="none" stroke="var(--pink)" stroke-width="2" stroke-dasharray="7 6" opacity="0.8"/></g>
+        <g transform="translate(80,88)">
+          <g class="ms-sun-spin">
+            <circle r="25" fill="var(--gold)"/>
+            <path d="M-25 0 L-37 -3 M-21 -14 L-31 -22 M-8 -24 L-11 -36 M10 -23 L16 -34 M23 -12 L35 -18 M26 3 L38 2 M21 16 L31 24 M7 25 L9 37 M-9 24 L-14 35 M-23 12 L-35 17" stroke="var(--gold)" stroke-width="2.3" stroke-linecap="round"/>
+            <circle cx="-8" cy="-3" r="2.4" fill="#221a30"/><circle cx="9" cy="-3" r="2.4" fill="#221a30"/>
+            <path d="M-8 8 Q1 14 9 7" fill="none" stroke="#221a30" stroke-width="2.2" stroke-linecap="round"/>
+          </g>
+        </g>
+        <g transform="translate(158,150)">
+          <g class="ms-moon-spin">
+            <circle r="19" fill="var(--cyan)" mask="url(#msMoonMask)"/>
+          </g>
+        </g>
+        <circle class="ms-tw" cx="42" cy="152" r="2.8" fill="var(--pink)"/>
+        <circle class="ms-tw ms-tw2" cx="192" cy="66" r="2.3" fill="var(--gold)"/>
+        <circle class="ms-tw ms-tw3" cx="120" cy="208" r="2" fill="var(--cyan)"/>
+      </svg>
+
+      <div class="p-label">
+        <div class="star">✶</div>
+        <h4 data-i18n="phoneCard">Card of the day</h4>
+        <p data-i18n="phoneCardSub">one draw · the sky has decided</p>
+      </div>
+      <div class="p-chips">
+        <span class="p-chip" data-i18n="g1">roots</span>
+        <span class="p-chip" data-i18n="g2">love</span>
+        <span class="p-chip" data-i18n="g3">path</span>
+        <span class="p-chip" data-i18n="g4">growth</span>
+        <span class="p-chip" data-i18n="g5">balance</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT AWAITS -->
+<section class="block" id="features">
+  <div class="eyebrow rv" data-i18n="featEyebrow">what's inside</div>
+  <h2 class="title rv" data-i18n="featTitle">A small daily ritual, with real depth underneath.</h2>
+  <div class="cards">
+    <div class="card gold rv">
+      <svg class="icon icon-sway" viewBox="0 0 80 80">
+        <circle cx="40" cy="40" r="18" fill="var(--gold)"/>
+        <path d="M40 8 L40 20 M40 60 L40 72 M8 40 L20 40 M60 40 L72 40 M16 16 L24 24 M56 56 L64 64 M16 64 L24 56 M56 24 L64 16" stroke="var(--gold)" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <h3 data-i18n="f1h">Card of the day</h3>
+      <p data-i18n="f1p">One draw each day: a short, warm reading of what this day carries for you. Keep a streak, jot a line in your moon journal.</p>
+      <span class="tag" data-i18n="f1t">free · every day</span>
+    </div>
+    <div class="card cyan rv">
+      <svg class="icon icon-sway" viewBox="0 0 80 80">
+        <path d="M40 20 Q 20 20 20 40 Q 20 58 38 58 L38 70 L48 70 L48 58 L58 58" fill="none" stroke="var(--cyan)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="40" cy="40" r="7" fill="var(--cyan)"/>
+      </svg>
+      <h3 data-i18n="f2h">The five gateways</h3>
+      <p data-i18n="f2p">Love, work, roots, inner growth and balance: five fields of life, each with a deep personal reading written from your chart.</p>
+      <span class="tag" data-i18n="f2t">one gate free daily</span>
+    </div>
+    <div class="card pink rv">
+      <svg class="icon icon-spin" viewBox="0 0 80 80">
+        <circle cx="40" cy="40" r="28" fill="none" stroke="var(--purple)" stroke-width="2.5"/>
+        <circle cx="40" cy="14" r="4" fill="var(--gold)"/>
+        <circle cx="63" cy="52" r="4" fill="var(--cyan)"/>
+        <circle cx="17" cy="52" r="4" fill="var(--pink)"/>
+      </svg>
+      <h3 data-i18n="f3h">Your chart</h3>
+      <p data-i18n="f3p">For the curious: your full map is there too. Birth chart, navamsa and planetary periods. Real Vedic astronomy, beautifully drawn.</p>
+      <span class="tag" data-i18n="f3t">for the curious</span>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="block" id="how">
+  <div class="eyebrow rv" data-i18n="howEyebrow">how it works</div>
+  <h2 class="title rv" data-i18n="howTitle">Three steps, then the sky does the talking.</h2>
+  <div class="steps">
+    <div class="step rv">
+      <svg class="icon icon-sway" viewBox="0 0 80 80">
+        <path d="M40 62 C 20 62 20 42 30 42 C 30 26 50 26 50 42 C 60 42 60 62 40 62 Z" fill="var(--gold)"/>
+        <path d="M40 14 L40 22" stroke="var(--gold)" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <h3 data-i18n="s1h">Tell TĀRĀ when you arrived</h3>
+      <p data-i18n="s1p">Date, time and place of birth. Don't know the exact time? TĀRĀ reads from the Moon instead. It still works.</p>
+    </div>
+    <div class="step rv">
+      <svg class="icon icon-spin" viewBox="0 0 80 80">
+        <circle cx="40" cy="40" r="26" fill="none" stroke="var(--cyan)" stroke-width="4"/>
+        <circle cx="40" cy="16" r="4.5" fill="var(--cyan)"/>
+        <path d="M40 40 L52 30" stroke="var(--cyan)" stroke-width="3.5" stroke-linecap="round"/>
+      </svg>
+      <h3 data-i18n="s2h">TĀRĀ computes your sky</h3>
+      <p data-i18n="s2p">A real ephemeris calculates where everything stood at your first breath, the same math astronomers use.</p>
+    </div>
+    <div class="step rv">
+      <svg class="icon icon-sway" viewBox="0 0 80 80">
+        <path d="M14 26 Q14 18 22 18 L58 18 Q66 18 66 26 L66 46 Q66 54 58 54 L34 54 L22 66 L24 54 Q14 54 14 46 Z" fill="none" stroke="var(--pink)" stroke-width="4" stroke-linejoin="round"/>
+        <circle cx="30" cy="36" r="3" fill="var(--pink)"/><circle cx="40" cy="36" r="3" fill="var(--pink)"/><circle cx="50" cy="36" r="3" fill="var(--pink)"/>
+      </svg>
+      <h3 data-i18n="s3h">You get words, not symbols</h3>
+      <p data-i18n="s3p">Every reading is written for you like a wise friend would speak: concrete, kind and about your life, not the sky's.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE READING -->
+<section class="block" id="sample">
+  <div class="eyebrow rv" data-i18n="sampleEyebrow">a real reading</div>
+  <h2 class="title rv" data-i18n="sampleTitle">This is how TĀRĀ speaks.</h2>
+  <figure class="quote rv">
+    <blockquote data-i18n="quote">
+      “Here's the thing about you: your sense of self was never meant to be found alone in a quiet room. You find out who you are by being in the room, in the conversation, in the middle of something bigger than yourself. And here's the tender part: the piece of you that's supposed to feel like home doesn't come automatically. You get to build it. Often through your own two hands.”
+    </blockquote>
+    <figcaption data-i18n="quoteCap">From a Roots and Identity gateway reading</figcaption>
+  </figure>
+</section>
+
+<!-- PLUS -->
+<section class="block" id="plus">
+  <div class="plusbox rv">
+    <div>
+      <h3>TĀRĀ+</h3>
+      <p data-i18n="plusP">The card of the day is always free, and one gateway opens for free each day: the one the Moon is passing through. TĀRĀ+ opens all five, every day.</p>
+      <div class="price" data-i18n="plusPrice">€4.99 / month · €39.99 / year</div>
+    </div>
+    <a class="cta big" data-i18n="plusCta" href="https://tara.expo.app">Start free</a>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="final">
+  <h2 class="rv" data-i18n="finalH">The sky already knows you.<br>Come meet it.</h2>
+  <p class="rv" data-i18n="finalP">Free to try. Works in your browser, right now.</p>
+  <a class="cta big fill rv" data-i18n="finalCta" href="https://tara.expo.app">Open TĀRĀ</a>
+</section>
+
+<footer>
+  <div class="fmark">TĀRĀ</div>
+  <div class="fnote" data-i18n="footNote">© 2026 TĀRĀ · the sky knows you</div>
+</footer>
+
+<script>
+/* ================= i18n ================= */
+const L = {
+  en: {
+    try:"Try TĀRĀ free", tryBig:"Open TĀRĀ, it's free",
+    typeLine:"The sky knows you.",
+    heroSub:"A daily reading written for you, made from your real birth chart, in words that feel human.",
+    scrollHint:"scroll to let the sky unfold",
+    cap1h:"It begins the moment you were born.",
+    cap1p:"The sky above held a pattern that belongs only to you. Not a horoscope for millions. Yours.",
+    cap2h:"TĀRĀ reads that pattern:", cap2k:"the real astronomy of it.",
+    cap2p:"Precise positions, ancient Jyotish wisdom, computed for your exact minute and place of birth.",
+    cap3h:"…and turns it into words a friend would say.",
+    cap3p:"No jargon. No planets to decode. Just you, seen clearly.",
+    phoneSub:"the sky knows you", phoneCard:"Card of the day", phoneCardSub:"one draw · the sky has decided",
+    g1:"roots", g2:"love", g3:"path", g4:"growth", g5:"balance",
+    featEyebrow:"what's inside", featTitle:"A small daily ritual, with real depth underneath.",
+    f1h:"Card of the day", f1p:"One draw each day: a short, warm reading of what this day carries for you. Keep a streak, jot a line in your moon journal.", f1t:"free · every day",
+    f2h:"The five gateways", f2p:"Love, work, roots, inner growth and balance: five fields of life, each with a deep personal reading written from your chart.", f2t:"one gate free daily",
+    f3h:"Your chart", f3p:"For the curious: your full map is there too. Birth chart, navamsa and planetary periods. Real Vedic astronomy, beautifully drawn.", f3t:"for the curious",
+    howEyebrow:"how it works", howTitle:"Three steps, then the sky does the talking.",
+    s1h:"Tell TĀRĀ when you arrived", s1p:"Date, time and place of birth. Don't know the exact time? TĀRĀ reads from the Moon instead. It still works.",
+    s2h:"TĀRĀ computes your sky", s2p:"A real ephemeris calculates where everything stood at your first breath, the same math astronomers use.",
+    s3h:"You get words, not symbols", s3p:"Every reading is written for you like a wise friend would speak: concrete, kind and about your life, not the sky's.",
+    sampleEyebrow:"a real reading", sampleTitle:"This is how TĀRĀ speaks.",
+    quote:"“Here's the thing about you: your sense of self was never meant to be found alone in a quiet room. You find out who you are by being in the room, in the conversation, in the middle of something bigger than yourself. And here's the tender part: the piece of you that's supposed to feel like home doesn't come automatically. You get to build it. Often through your own two hands.”",
+    quoteCap:"From a Roots and Identity gateway reading",
+    plusP:"The card of the day is always free, and one gateway opens for free each day: the one the Moon is passing through. TĀRĀ+ opens all five, every day.",
+    plusPrice:"€4.99 / month · €39.99 / year", plusCta:"Start free",
+    finalH:"The sky already knows you.<br>Come meet it.", finalP:"Free to try. Works in your browser, right now.", finalCta:"Open TĀRĀ",
+    footNote:"© 2026 TĀRĀ · the sky knows you",
+  },
+  sr: {
+    try:"Probaj TĀRĀ besplatno", tryBig:"Otvori TĀRĀ, besplatno je",
+    typeLine:"Nebo te već zna.",
+    heroSub:"Dnevno čitanje pisano za tebe, iz tvoje prave natalne karte, rečima koje zvuče ljudski.",
+    scrollHint:"skroluj i pusti nebo da se otvori",
+    cap1h:"Počinje u trenutku tvog rođenja.",
+    cap1p:"Nebo iznad tebe držalo je obrazac koji pripada samo tebi. Ne horoskop za milione. Tvoj.",
+    cap2h:"TĀRĀ čita taj obrazac:", cap2k:"pravu astronomiju iza njega.",
+    cap2p:"Precizne pozicije, drevna džjotiš mudrost, izračunato za tačan minut i mesto tvog rođenja.",
+    cap3h:"…i pretvara ga u reči koje bi ti rekla prijateljica.",
+    cap3p:"Bez žargona. Bez planeta za dešifrovanje. Samo ti, jasno viđena.",
+    phoneSub:"nebo te već zna", phoneCard:"Karta dana", phoneCardSub:"jedno izvlačenje · nebo je odlučilo",
+    g1:"koren", g2:"ljubav", g3:"put", g4:"razvoj", g5:"balans",
+    featEyebrow:"šta te čeka", featTitle:"Mali dnevni ritual, sa pravom dubinom ispod.",
+    f1h:"Karta dana", f1p:"Jedno izvlačenje dnevno: kratko, toplo čitanje o tome šta ovaj dan nosi za tebe. Gradi niz, zapiši red u mesečev dnevnik.", f1t:"besplatno · svaki dan",
+    f2h:"Pet kapija", f2p:"Ljubav, posao, koren, unutrašnji razvoj i balans: pet polja života, svako sa dubinskim ličnim čitanjem iz tvoje karte.", f2t:"jedna kapija besplatna dnevno",
+    f3h:"Tvoja karta", f3p:"Za radoznale: cela mapa je tu. Natalna karta, navamša i planetarni periodi. Prava vedska astronomija, lepo nacrtana.", f3t:"za radoznale",
+    howEyebrow:"kako radi", howTitle:"Tri koraka, a onda nebo priča.",
+    s1h:"Reci TĀRĀ kad si stigla", s1p:"Datum, vreme i mesto rođenja. Ne znaš tačno vreme? TĀRĀ tada čita iz Meseca. I dalje radi.",
+    s2h:"TĀRĀ izračuna tvoje nebo", s2p:"Prava efemerida računa gde je sve stajalo pri tvom prvom dahu, ista matematika koju koriste astronomi.",
+    s3h:"Dobijaš reči, ne simbole", s3p:"Svako čitanje je napisano za tebe kao što bi govorila mudra prijateljica: konkretno, blago i o tvom životu, ne o nebu.",
+    sampleEyebrow:"pravo čitanje", sampleTitle:"Ovako TĀRĀ govori.",
+    quote:"„Evo šta je stvar sa tobom: tvoj osećaj sebe nikad nije trebalo da se pronađe sama u tihoj sobi. Otkrivaš ko si tako što si u prostoriji, u razgovoru, usred nečega većeg od sebe. A evo i nežnog dela: onaj deo tebe koji bi trebalo da bude dom ne dolazi sam od sebe. Ti ga gradiš. Često sopstvenim rukama.“",
+    quoteCap:"Iz čitanja kapije Koren i identitet",
+    plusP:"Karta dana je uvek besplatna, a jedna kapija se otvara besplatno svakog dana: ona kroz koju Mesec prolazi. TĀRĀ+ otvara svih pet, svaki dan.",
+    plusPrice:"4,99 € / mesečno · 39,99 € / godišnje", plusCta:"Počni besplatno",
+    finalH:"Nebo te već zna.<br>Dođi da ga upoznaš.", finalP:"Besplatno za probu. Radi u tvom browseru, odmah.", finalCta:"Otvori TĀRĀ",
+    footNote:"© 2026 TĀRĀ · nebo te već zna",
+  },
+  de: {
+    try:"TĀRĀ kostenlos testen", tryBig:"TĀRĀ öffnen, kostenlos",
+    typeLine:"Der Himmel kennt dich.",
+    heroSub:"Eine tägliche Lesung, geschrieben für dich, aus deinem echten Geburtshoroskop, in Worten, die menschlich klingen.",
+    scrollHint:"scrolle und lass den Himmel sich öffnen",
+    cap1h:"Es beginnt im Moment deiner Geburt.",
+    cap1p:"Der Himmel über dir trug ein Muster, das nur dir gehört. Kein Horoskop für Millionen. Deins.",
+    cap2h:"TĀRĀ liest dieses Muster:", cap2k:"die echte Astronomie dahinter.",
+    cap2p:"Präzise Positionen, uraltes Jyotish-Wissen, berechnet für deine genaue Minute und deinen Geburtsort.",
+    cap3h:"…und macht daraus Worte, wie sie eine Freundin sagen würde.",
+    cap3p:"Kein Jargon. Keine Planeten zum Entschlüsseln. Nur du, klar gesehen.",
+    phoneSub:"der Himmel kennt dich", phoneCard:"Karte des Tages", phoneCardSub:"ein Zug · der Himmel hat entschieden",
+    g1:"Wurzeln", g2:"Liebe", g3:"Weg", g4:"Wachstum", g5:"Balance",
+    featEyebrow:"was dich erwartet", featTitle:"Ein kleines tägliches Ritual, mit echter Tiefe darunter.",
+    f1h:"Karte des Tages", f1p:"Ein Zug pro Tag: eine kurze, warme Lesung darüber, was dieser Tag für dich trägt. Halte deine Serie, schreib eine Zeile ins Mondtagebuch.", f1t:"kostenlos · jeden Tag",
+    f2h:"Die fünf Tore", f2p:"Liebe, Arbeit, Wurzeln, inneres Wachstum und Balance: fünf Lebensfelder, jedes mit einer tiefen persönlichen Lesung aus deinem Horoskop.", f2t:"ein Tor täglich frei",
+    f3h:"Dein Horoskop", f3p:"Für Neugierige: die ganze Karte ist auch da. Geburtshoroskop, Navamsha und Planetenperioden. Echte vedische Astronomie, schön gezeichnet.", f3t:"für Neugierige",
+    howEyebrow:"so funktioniert es", howTitle:"Drei Schritte, dann spricht der Himmel.",
+    s1h:"Sag TĀRĀ, wann du ankamst", s1p:"Datum, Zeit und Ort deiner Geburt. Genaue Zeit unbekannt? Dann liest TĀRĀ vom Mond. Es funktioniert trotzdem.",
+    s2h:"TĀRĀ berechnet deinen Himmel", s2p:"Eine echte Ephemeride berechnet, wo alles bei deinem ersten Atemzug stand, dieselbe Mathematik, die Astronomen nutzen.",
+    s3h:"Du bekommst Worte, keine Symbole", s3p:"Jede Lesung ist für dich geschrieben, wie eine weise Freundin sprechen würde: konkret, freundlich und über dein Leben, nicht über den Himmel.",
+    sampleEyebrow:"eine echte Lesung", sampleTitle:"So spricht TĀRĀ.",
+    quote:"„Die Sache mit dir ist: Dein Selbstgefühl war nie dafür gedacht, allein in einem stillen Zimmer gefunden zu werden. Du findest heraus, wer du bist, indem du im Raum bist, im Gespräch, mitten in etwas Größerem als dir selbst. Und hier der zarte Teil: das Stück von dir, das sich wie Zuhause anfühlen soll, kommt nicht von allein. Du darfst es bauen. Oft mit deinen eigenen Händen.“",
+    quoteCap:"Aus einer Lesung des Tores Wurzeln und Identität",
+    plusP:"Die Karte des Tages ist immer kostenlos, und ein Tor öffnet sich jeden Tag gratis: das, durch das der Mond gerade zieht. TĀRĀ+ öffnet alle fünf, jeden Tag.",
+    plusPrice:"4,99 € / Monat · 39,99 € / Jahr", plusCta:"Kostenlos starten",
+    finalH:"Der Himmel kennt dich schon.<br>Komm und triff ihn.", finalP:"Kostenlos ausprobieren. Läuft in deinem Browser, sofort.", finalCta:"TĀRĀ öffnen",
+    footNote:"© 2026 TĀRĀ · der Himmel kennt dich",
+  },
+};
+
+let lang = localStorage.getItem("tara.lang");
+if (!lang) {
+  const nav = (navigator.language || "en").toLowerCase();
+  lang = nav.startsWith("sr") ? "sr" : nav.startsWith("de") ? "de" : "en";
+}
+
+function applyLang(l) {
+  lang = l; localStorage.setItem("tara.lang", l);
+  document.documentElement.lang = l;
+  const dict = L[l];
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (dict[key] !== undefined) {
+      if (key === "finalH") el.innerHTML = dict[key]; else el.textContent = dict[key];
+    }
+  });
+  document.querySelectorAll(".langs button").forEach(b => b.classList.toggle("on", b.dataset.lang === l));
+  restartType(dict.typeLine);
+}
+document.querySelectorAll(".langs button").forEach(b => b.addEventListener("click", () => applyLang(b.dataset.lang)));
+
+/* ================= typewriter ================= */
+const typeEl = document.getElementById("type");
+let typeTimer = null;
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function restartType(line) {
+  if (typeTimer) clearInterval(typeTimer);
+  if (reduced) { typeEl.textContent = line; return; }
+  typeEl.textContent = "";
+  let i = 0;
+  typeTimer = setInterval(() => {
+    i++;
+    typeEl.textContent = line.slice(0, i);
+    if (i >= line.length) clearInterval(typeTimer);
+  }, 65);
+}
+
+/* ================= reveal on scroll ================= */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+}), { threshold: 0.18 });
+document.querySelectorAll(".rv").forEach(el => io.observe(el));
+
+/* ================= particle journey ================= */
+const canvas = document.getElementById("sky");
+const ctx = canvas.getContext("2d");
+const journey = document.getElementById("journey");
+const phone = document.getElementById("phone");
+const caps = [document.getElementById("cap1"), document.getElementById("cap2"), document.getElementById("cap3")];
+
+const N = 240;
+const COLORS = ["#f4ecff","#f4ecff","#f4ecff","#f4ecff","#f2b035","#27e6ff","#ff3d9a","#c9a0ff"];
+let W = 0, H = 0, DPR = 1;
+let particles = [];
+let layoutA = [], layoutB = [], layoutC = [];
+
+function rand(seed) { // deterministic-ish
+  let s = seed;
+  return () => (s = (s * 16807) % 2147483647) / 2147483647;
+}
+
+function buildLayouts() {
+  const r = rand(42);
+  const cx = W / 2, cy = H / 2;
+  const R = Math.min(W, H) * 0.32;
+
+  // A: scattered stars
+  layoutA = Array.from({ length: N }, () => ({
+    x: r() * W, y: r() * H, s: 1 + r() * 2.2,
+  }));
+
+  // B: natal wheel, outer ring, inner ring, 12 spokes, 4 "planets"
+  layoutB = [];
+  const outer = Math.round(N * 0.42), inner = Math.round(N * 0.2), spokes = Math.round(N * 0.3);
+  for (let i = 0; i < outer; i++) {
+    const a = (i / outer) * Math.PI * 2;
+    layoutB.push({ x: cx + Math.cos(a) * R, y: cy + Math.sin(a) * R, s: 1.8 });
+  }
+  for (let i = 0; i < inner; i++) {
+    const a = (i / inner) * Math.PI * 2;
+    layoutB.push({ x: cx + Math.cos(a) * R * 0.55, y: cy + Math.sin(a) * R * 0.55, s: 1.6 });
+  }
+  for (let i = 0; i < spokes; i++) {
+    const spoke = i % 12;
+    const a = (spoke / 12) * Math.PI * 2;
+    const t = 0.58 + ((i / spokes) % 1) * 0.4;
+    layoutB.push({ x: cx + Math.cos(a) * R * t, y: cy + Math.sin(a) * R * t, s: 1.4 });
+  }
+  while (layoutB.length < N) layoutB.push({ x: cx, y: cy, s: 2 });
+  // 4 bright planets
+  [[0.72, 0.6, "#f2b035"], [2.1, 0.72, "#27e6ff"], [3.6, 0.5, "#ff3d9a"], [5.1, 0.66, "#c9a0ff"]].forEach(([a, t], idx) => {
+    layoutB[idx * 3] = { x: cx + Math.cos(a) * R * t, y: cy + Math.sin(a) * R * t, s: 4.4 };
+  });
+
+  // C: phone outline (rounded rect) matching #phone box
+  layoutC = [];
+  const pw = Math.min(280, W * 0.62), ph = pw * (19 / 9);
+  const left = cx - pw / 2, top = cy - ph / 2, rr = 38;
+  const per = 2 * (pw + ph);
+  for (let i = 0; i < N; i++) {
+    const d = (i / N) * per;
+    let x, y;
+    if (d < pw) { x = left + d; y = top; }
+    else if (d < pw + ph) { x = left + pw; y = top + (d - pw); }
+    else if (d < 2 * pw + ph) { x = left + pw - (d - pw - ph); y = top + ph; }
+    else { x = left; y = top + ph - (d - 2 * pw - ph); }
+    // soften corners toward rounded shape
+    const nx = Math.max(left + rr, Math.min(left + pw - rr, x));
+    const ny = Math.max(top + rr, Math.min(top + ph - rr, y));
+    const dx = x - nx, dy = y - ny;
+    const dist = Math.hypot(dx, dy);
+    if (dist > 0) { x = nx + (dx / dist) * rr; y = ny + (dy / dist) * rr; }
+    layoutC.push({ x, y, s: 1.8 });
+  }
+}
+
+function resize() {
+  DPR = Math.min(devicePixelRatio || 1, 2);
+  W = innerWidth; H = innerHeight;
+  canvas.width = W * DPR; canvas.height = H * DPR;
+  canvas.style.width = W + "px"; canvas.style.height = H + "px";
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  buildLayouts();
+}
+addEventListener("resize", resize);
+resize();
+
+particles = Array.from({ length: N }, (_, i) => ({
+  x: layoutA[i].x, y: layoutA[i].y,
+  c: COLORS[i % COLORS.length],
+  tw: Math.random() * Math.PI * 2,
+}));
+
+const ease = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+const clamp01 = v => Math.max(0, Math.min(1, v));
+
+function journeyProgress() {
+  const rect = journey.getBoundingClientRect();
+  const total = rect.height - innerHeight;
+  return clamp01(-rect.top / total);
+}
+
+function capOpacity(p, center, width) {
+  return clamp01(1 - Math.abs(p - center) / width);
+}
+
+let raf;
+function frame(t) {
+  const p = journeyProgress();
+
+  // morph plan: 0 to 0.35 scatter to wheel, 0.35 to 0.62 hold wheel (slow spin), 0.62 to 0.92 wheel to phone
+  let from = layoutA, to = layoutB, mix = 0, spin = 0;
+  if (p < 0.35) { mix = ease(clamp01(p / 0.35)); }
+  else if (p < 0.62) { from = layoutB; to = layoutB; mix = 1; spin = (p - 0.35) * 0.55; }
+  else { from = layoutB; to = layoutC; mix = ease(clamp01((p - 0.62) / 0.3)); spin = 0.1485 * (1 - mix); }
+
+  const cx = W / 2, cy = H / 2;
+  ctx.clearRect(0, 0, W, H);
+
+  for (let i = 0; i < N; i++) {
+    const a = from[i], b = to[i];
+    let tx = a.x + (b.x - a.x) * mix;
+    let ty = a.y + (b.y - a.y) * mix;
+    if (spin) {
+      const dx = tx - cx, dy = ty - cy;
+      const cos = Math.cos(spin), sin = Math.sin(spin);
+      tx = cx + dx * cos - dy * sin;
+      ty = cy + dx * sin + dy * cos;
+    }
+    const pt = particles[i];
+    pt.x += (tx - pt.x) * 0.09;
+    pt.y += (ty - pt.y) * 0.09;
+    const size = a.s + (b.s - a.s) * mix;
+    const twinkle = 0.72 + 0.28 * Math.sin(t / 640 + pt.tw);
+    ctx.globalAlpha = twinkle * (p > 0.92 ? clamp01((1 - p) / 0.08) : 1);
+    ctx.fillStyle = pt.c;
+    ctx.beginPath();
+    ctx.arc(pt.x, pt.y, size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+
+  // captions
+  caps[0].style.opacity = capOpacity(p, 0.13, 0.13);
+  caps[1].style.opacity = capOpacity(p, 0.48, 0.14);
+  caps[2].style.opacity = capOpacity(p, 0.8, 0.12);
+
+  // phone reveal
+  phone.classList.toggle("show", p > 0.88);
+
+  raf = requestAnimationFrame(frame);
+}
+if (!reduced) raf = requestAnimationFrame(frame);
+else { caps.forEach(c => c.style.opacity = 1); phone.classList.add("show"); }
+
+applyLang(lang);
+</script>
+</body>
+</html>
