@@ -224,11 +224,17 @@
 
   /* final cta */
   #final{
-    text-align:center; padding:130px 24px 120px; position:relative;
+    text-align:center; padding:130px 24px 120px; position:relative; overflow:hidden;
   }
+  #finalsky{position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none}
+  #final h2, #final p, #final .cta{position:relative; z-index:1}
   #final h2{font-family:var(--disp); font-weight:900; font-size:clamp(26px,5vw,46px); line-height:1.25; text-wrap:balance}
   #final p{margin-top:16px; color:var(--text2); font-size:17px}
   #final .cta{margin-top:34px}
+  /* heading emerges out of the starfield: blurred + small + transparent → sharp */
+  #final h2.emerge{opacity:0; transform:scale(.9); filter:blur(14px);
+    transition:opacity 1.1s ease, transform 1.1s cubic-bezier(.2,.7,.2,1), filter 1.1s ease}
+  #final h2.emerge.lit{opacity:1; transform:none; filter:none}
 
   footer{
     border-top:1px solid var(--border-soft); padding:36px 26px; display:flex; flex-wrap:wrap;
@@ -245,6 +251,7 @@
     *{animation:none!important; transition:none!important}
     html{scroll-behavior:auto}
     .rv{opacity:1; transform:none}
+    #final h2.emerge{opacity:1; transform:none; filter:none}
     #journey{height:auto}
     .stage{position:static; height:auto; min-height:70svh}
     .caption{position:static; transform:none; opacity:1!important; margin:30px auto; pointer-events:auto}
@@ -438,7 +445,8 @@
 
 <!-- FINAL CTA -->
 <section id="final">
-  <h2 class="rv" data-i18n="finalH">The sky already knows you.<br>Come meet it.</h2>
+  <canvas id="finalsky" aria-hidden="true"></canvas>
+  <h2 class="emerge" data-i18n="finalH">The sky already knows you.<br>Come meet it.</h2>
   <p class="rv" data-i18n="finalP">Free to try. Works in your browser, right now.</p>
   <a class="cta big fill rv" data-i18n="finalCta" href="https://tara.expo.app">Open TĀRĀ</a>
 </section>
@@ -798,6 +806,87 @@ starifyAll();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(starifyAll);
 let starTO;
 addEventListener("resize", () => { clearTimeout(starTO); starTO = setTimeout(starifyAll, 200); });
+
+/* ================= final section: starfield + heading emerging from it ================= */
+(function(){
+  const sec = document.getElementById("final");
+  const cv = document.getElementById("finalsky");
+  const head = sec && sec.querySelector("h2.emerge");
+  if (!sec || !cv || !head) return;
+  const c = cv.getContext("2d");
+  const ease = t => 1 - Math.pow(1 - t, 3);
+  let w = 0, h = 0, dpr = 1, stars = [], gather = [], running = false, raf = 0, lit = false, t0 = 0;
+
+  function size(){
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    w = sec.clientWidth; h = sec.clientHeight;
+    cv.width = w * dpr; cv.height = h * dpr;
+    cv.style.width = w + "px"; cv.style.height = h + "px";
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.round((w * h) / 5200);
+    stars = Array.from({ length: Math.max(120, Math.min(n, 320)) }, () => ({
+      x: Math.random() * w, y: Math.random() * h, s: 0.6 + Math.random() * 1.9,
+      c: COLORS[(Math.random() * COLORS.length) | 0], tw: Math.random() * 6.28,
+      tws: 0.6 + Math.random() * 1.1, vx: (Math.random() - 0.5) * 0.05, vy: (Math.random() - 0.5) * 0.05,
+    }));
+  }
+  // A burst of stars that fly in from the edges and gather into an ellipse
+  // behind the heading, brightening as the words appear, then fading away.
+  function burst(){
+    const hr = head.getBoundingClientRect(), sr = sec.getBoundingClientRect();
+    const cx = hr.left - sr.left + hr.width / 2, cy = hr.top - sr.top + hr.height / 2;
+    gather = Array.from({ length: 60 }, () => {
+      const a = Math.random() * 6.28, rad = 30 + Math.random() * (hr.width * 0.55);
+      return {
+        x: Math.random() * w, y: Math.random() * h,
+        tx: cx + Math.cos(a) * rad, ty: cy + Math.sin(a) * rad * 0.42,
+        s: 0.8 + Math.random() * 2.2, c: COLORS[(Math.random() * COLORS.length) | 0],
+      };
+    });
+    t0 = performance.now();
+  }
+  function frame(now){
+    c.clearRect(0, 0, w, h);
+    for (const st of stars){
+      st.x += st.vx; st.y += st.vy;
+      if (st.x < 0) st.x += w; else if (st.x > w) st.x -= w;
+      if (st.y < 0) st.y += h; else if (st.y > h) st.y -= h;
+      c.globalAlpha = 0.35 + 0.45 * (0.5 + 0.5 * Math.sin(now / 700 * st.tws + st.tw));
+      c.fillStyle = st.c;
+      c.beginPath(); c.arc(st.x, st.y, st.s, 0, 6.283); c.fill();
+    }
+    if (gather.length){
+      const p = Math.min(1, (now - t0) / 1500);
+      const move = ease(Math.min(1, p / 0.6));
+      const fade = p < 0.6 ? 1 : 1 - (p - 0.6) / 0.4;
+      for (const g of gather){
+        c.globalAlpha = 0.9 * fade;
+        c.fillStyle = g.c;
+        c.beginPath();
+        c.arc(g.x + (g.tx - g.x) * move, g.y + (g.ty - g.y) * move, g.s, 0, 6.283);
+        c.fill();
+      }
+      if (p >= 1) gather = [];
+    }
+    c.globalAlpha = 1;
+    raf = requestAnimationFrame(frame);
+  }
+
+  size();
+  if (reduced){
+    head.classList.add("lit");
+    for (const st of stars){ c.globalAlpha = 0.6; c.fillStyle = st.c; c.beginPath(); c.arc(st.x, st.y, st.s, 0, 6.283); c.fill(); }
+    return;
+  }
+  new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting){
+      if (!running){ running = true; raf = requestAnimationFrame(frame); }
+      if (!lit){ lit = true; head.classList.add("lit"); burst(); }
+    } else if (running){ running = false; cancelAnimationFrame(raf); }
+  }), { threshold: 0.3 }).observe(sec);
+  let ftO;
+  addEventListener("resize", () => { clearTimeout(ftO); ftO = setTimeout(size, 200); });
+})();
 </script>
 </body>
 </html>
