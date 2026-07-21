@@ -780,10 +780,10 @@ function buildDotsFor(el){
   el.appendChild(svg); // must be in the DOM to measure the path
 
   const total = path.getTotalLength();
-  const count = Math.max(30, Math.round(total / 16));
+  const count = Math.max(22, Math.round(total / 24));
   const frag = document.createDocumentFragment();
   for (let i = 0; i < count; i++){
-    if (Math.random() < 0.08) continue; // gaps → irregular, not a perfect outline
+    if (Math.random() < 0.1) continue; // gaps → irregular, not a perfect outline
     const p = path.getPointAtLength((total * i) / count);
     const c = document.createElementNS(SVGNS, "circle");
     c.setAttribute("cx", (p.x + (Math.random() - 0.5) * 7).toFixed(1));
