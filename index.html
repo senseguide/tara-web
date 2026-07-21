@@ -155,9 +155,10 @@
   /* organic "sticker" cards, same asymmetric corners as the app's gateway cards */
   .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:22px; margin-top:44px}
   .card{
-    border:2.5px solid var(--border); border-radius:46px 54px 32px 26px;
+    border:none; border-radius:46px 54px 32px 26px;
     background:rgba(27,15,48,.55);
     padding:28px 24px; transition:transform .3s, border-color .3s, box-shadow .3s;
+    position:relative;
   }
   .card:nth-child(odd){transform:rotate(-1deg)}
   .card:nth-child(even){transform:rotate(1deg)}
@@ -176,11 +177,20 @@
   @keyframes iconSway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
   .icon-spin{transform-box:fill-box; transform-origin:center; animation:msSpin 22s linear infinite}
 
+  /* constellation card frames: the border is drawn as irregular twinkling
+     stars along the perimeter (built in JS), same star language as the hero. */
+  .constellation{position:absolute; inset:0; z-index:0; overflow:visible; pointer-events:none}
+  .card > *:not(.constellation), .step > *:not(.constellation){position:relative; z-index:1}
+  .cdot{animation:cardTwinkle var(--dur,2.6s) ease-in-out infinite; animation-delay:var(--d,0s)}
+  @keyframes cardTwinkle{0%,100%{opacity:.28}50%{opacity:1}}
+  .card:hover .constellation, .step:hover .constellation{filter:brightness(1.35)}
+
   /* steps, same card language as features (not a corporate dotted timeline) */
   .steps{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:22px; margin-top:44px}
   .step{
-    border:2.5px solid var(--border); border-radius:32px 26px 54px 46px;
+    border:none; border-radius:32px 26px 54px 46px;
     background:rgba(27,15,48,.55); padding:26px 22px;
+    position:relative;
   }
   .step:nth-child(1){transform:rotate(1deg)}
   .step:nth-child(2){transform:rotate(-1deg)}
@@ -726,6 +736,68 @@ if (!reduced) raf = requestAnimationFrame(frame);
 else { caps.forEach(c => c.style.opacity = 1); phone.classList.add("show"); }
 
 applyLang(lang);
+
+/* ================= constellation card frames ================= */
+const SVGNS = "http://www.w3.org/2000/svg";
+function accentOf(el){
+  if (el.classList.contains("gold")) return "#f2b035";
+  if (el.classList.contains("cyan")) return "#27e6ff";
+  if (el.classList.contains("pink")) return "#ff3d9a";
+  return null;
+}
+function roundedRectPath(w, h, r){
+  const m = Math.min(w, h) / 2;
+  const [tl, tr, br, bl] = r.map(v => Math.min(v, m));
+  return `M ${tl} 0 H ${w-tr} A ${tr} ${tr} 0 0 1 ${w} ${tr} V ${h-br} `
+       + `A ${br} ${br} 0 0 1 ${w-br} ${h} H ${bl} A ${bl} ${bl} 0 0 1 0 ${h-bl} `
+       + `V ${tl} A ${tl} ${tl} 0 0 1 ${tl} 0 Z`;
+}
+function buildDotsFor(el){
+  el.querySelector(".constellation")?.remove();
+  const w = el.offsetWidth, h = el.offsetHeight;
+  if (!w || !h) return;
+  const cs = getComputedStyle(el);
+  const r = ["TopLeft","TopRight","BottomRight","BottomLeft"]
+    .map(k => parseFloat(cs["border" + k + "Radius"]) || 0);
+  const accent = accentOf(el);
+
+  const svg = document.createElementNS(SVGNS, "svg");
+  svg.setAttribute("class", "constellation");
+  svg.setAttribute("width", w); svg.setAttribute("height", h);
+  svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+  const path = document.createElementNS(SVGNS, "path");
+  path.setAttribute("d", roundedRectPath(w, h, r));
+  path.setAttribute("fill", "none");
+  svg.appendChild(path);
+  el.appendChild(svg); // must be in the DOM to measure the path
+
+  const total = path.getTotalLength();
+  const count = Math.max(30, Math.round(total / 16));
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < count; i++){
+    if (Math.random() < 0.08) continue; // gaps → irregular, not a perfect outline
+    const p = path.getPointAtLength((total * i) / count);
+    const c = document.createElementNS(SVGNS, "circle");
+    c.setAttribute("cx", (p.x + (Math.random() - 0.5) * 7).toFixed(1));
+    c.setAttribute("cy", (p.y + (Math.random() - 0.5) * 7).toFixed(1));
+    c.setAttribute("r", (0.8 + Math.random() * 1.9).toFixed(2));
+    c.setAttribute("fill", accent && Math.random() < 0.34 ? accent : COLORS[(Math.random() * COLORS.length) | 0]);
+    c.setAttribute("class", "cdot");
+    if (!reduced){
+      c.style.setProperty("--d", (Math.random() * 3).toFixed(2) + "s");
+      c.style.setProperty("--dur", (1.8 + Math.random() * 2.2).toFixed(2) + "s");
+    }
+    frag.appendChild(c);
+  }
+  path.remove();
+  svg.appendChild(frag);
+}
+function starifyAll(){ document.querySelectorAll(".card, .step").forEach(buildDotsFor); }
+
+starifyAll();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(starifyAll);
+let starTO;
+addEventListener("resize", () => { clearTimeout(starTO); starTO = setTimeout(starifyAll, 200); });
 </script>
 </body>
 </html>
