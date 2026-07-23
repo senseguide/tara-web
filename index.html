@@ -262,6 +262,9 @@
   }
   footer .fmark{font-family:var(--disp); font-weight:700; letter-spacing:.3em; font-size:13px}
   footer .fnote{font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.06em}
+  footer .flinks{font-family:var(--mono); font-size:11px; letter-spacing:.06em; display:flex; gap:14px}
+  footer .flinks a{color:var(--muted); text-decoration:none; transition:color .2s}
+  footer .flinks a:hover{color:var(--gold)}
 
   /* reveal on scroll */
   .rv{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease}
@@ -524,6 +527,10 @@
 <footer>
   <div class="fmark">TĀRĀ</div>
   <div class="fnote" data-i18n="footNote">© 2026 TĀRĀ · the sky knows you</div>
+  <div class="flinks">
+    <a href="privacy.html" data-i18n="footPrivacy">Privacy</a>
+    <a href="terms.html" data-i18n="footTerms">Terms</a>
+  </div>
 </footer>
 
 <script>
@@ -566,7 +573,7 @@ const L = {
     plusP:"TĀRĀ+ opens the deeper readings: all five gateways, your monthly look-back, your life chapters and more. New words as the sky keeps moving.",
     plusPrice:"€4.99 / month · €39.99 / year", plusCta:"Start free",
     finalH:"The sky already knows you.<br>Come meet it.", finalP:"Free to try. Works in your browser, right now.", finalCta:"Open TĀRĀ",
-    footNote:"© 2026 TĀRĀ · the sky knows you",
+    footNote:"© 2026 TĀRĀ · the sky knows you", footPrivacy:"Privacy", footTerms:"Terms",
   },
   sr: {
     try:"Probaj TARU besplatno", tryBig:"Otvori TARU, besplatno je",
@@ -605,7 +612,7 @@ const L = {
     plusP:"TĀRĀ+ otvara dublja čitanja: svih pet kapija, tvoj mesečni osvrt, poglavlja tvog života i još. Nove reči kako se nebo pomera.",
     plusPrice:"4,99 € / mesečno · 39,99 € / godišnje", plusCta:"Počni besplatno",
     finalH:"Nebo te već zna.<br>Dođi da ga upoznaš.", finalP:"Besplatno za probu. Radi u tvom browseru, odmah.", finalCta:"Otvori TARU",
-    footNote:"© 2026 TĀRĀ · nebo te već zna",
+    footNote:"© 2026 TĀRĀ · nebo te već zna", footPrivacy:"Privatnost", footTerms:"Uslovi",
   },
   de: {
     try:"TĀRĀ kostenlos testen", tryBig:"TĀRĀ öffnen, kostenlos",
@@ -644,7 +651,7 @@ const L = {
     plusP:"TĀRĀ+ öffnet die tieferen Lesungen: alle fünf Tore, deinen monatlichen Rückblick, deine Lebenskapitel und mehr. Neue Worte, während der Himmel weiterzieht.",
     plusPrice:"4,99 € / Monat · 39,99 € / Jahr", plusCta:"Kostenlos starten",
     finalH:"Der Himmel kennt dich schon.<br>Komm und triff ihn.", finalP:"Kostenlos ausprobieren. Läuft in deinem Browser, sofort.", finalCta:"TĀRĀ öffnen",
-    footNote:"© 2026 TĀRĀ · der Himmel kennt dich",
+    footNote:"© 2026 TĀRĀ · der Himmel kennt dich", footPrivacy:"Datenschutz", footTerms:"Nutzung",
   },
 };
 

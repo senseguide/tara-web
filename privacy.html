@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TĀRĀ · Privacy Policy</title>
+<meta name="robots" content="index,follow">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg0:#0d1033; --bg1:#171049; --bg2:#38102f;
+    --panel:#1b0f30; --border:#3a2d6b; --border-soft:#2c2050;
+    --text:#f4ecff; --text2:#d8c9f2; --muted:#9a8ec2;
+    --gold:#f2b035; --cyan:#27e6ff;
+    --disp:'Unbounded',sans-serif; --body:'Space Grotesk',sans-serif; --mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:var(--body); color:var(--text); line-height:1.62;
+    background:linear-gradient(178deg,var(--bg0) 0%,var(--bg1) 42%,var(--bg2) 100%) fixed;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--gold)}
+  header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 26px; border-bottom:1px solid var(--border-soft);
+    position:sticky; top:0; z-index:10;
+    background:linear-gradient(180deg,rgba(13,16,51,.94),rgba(13,16,51,.72));
+    backdrop-filter:blur(6px);
+  }
+  .wordmark{
+    font-family:var(--disp); font-weight:900; font-size:18px; letter-spacing:.42em;
+    text-shadow:0 0 22px rgba(242,176,53,.55); text-decoration:none; color:var(--text);
+  }
+  .langs{display:flex; border:1.5px solid var(--border); border-radius:99px; overflow:hidden}
+  .langs button{
+    font-family:var(--mono); font-size:11px; letter-spacing:.08em; padding:7px 13px;
+    background:none; border:none; color:var(--muted); cursor:pointer; transition:color .2s;
+  }
+  .langs button.on{color:var(--gold)}
+  main{max-width:720px; margin:0 auto; padding:48px 24px 90px}
+  h1{font-family:var(--disp); font-weight:700; font-size:30px; letter-spacing:.01em; margin-bottom:6px; text-wrap:balance}
+  .eff{font-family:var(--mono); font-size:12px; color:var(--muted); margin-bottom:34px}
+  h2{font-family:var(--disp); font-weight:500; font-size:19px; color:var(--gold); margin:34px 0 10px; text-wrap:balance}
+  p{color:var(--text2); margin-bottom:12px}
+  ul{color:var(--text2); margin:0 0 12px 20px}
+  li{margin-bottom:7px}
+  strong{color:var(--text)}
+  .lead{font-size:16.5px; color:var(--text)}
+  .foot{margin-top:46px; padding-top:22px; border-top:1px solid var(--border-soft); font-size:13px; color:var(--muted)}
+  .foot a{text-decoration:none}
+  [data-lang]{display:none}
+  [data-lang].show{display:block}
+</style>
+</head>
+<body>
+<header>
+  <a class="wordmark" href="index.html">TĀRĀ</a>
+  <div class="langs" role="group" aria-label="Language">
+    <button data-set="sr" class="on">SR</button>
+    <button data-set="en">EN</button>
+  </div>
+</header>
+
+<main>
+  <!-- ================= SR ================= -->
+  <div data-lang="sr" class="show">
+    <h1>Politika privatnosti</h1>
+    <p class="eff">Poslednja izmena: 23. jul 2026.</p>
+    <p class="lead">TĀRĀ ti piše dnevno čitanje iz tvoje prave natalne karte. Da bismo to uradili, potrebni su nam podaci o tvom rođenju. Ova politika objašnjava tačno šta prikupljamo, zašto i kome se prosleđuje — jednostavnim rečima.</p>
+
+    <h2>Ko smo mi</h2>
+    <p>TĀRĀ ("mi", "nas") je aplikacija za astrološku samorefleksiju. Za pitanja o privatnosti piši na <a href="mailto:privacy@dailytara.com">privacy@dailytara.com</a>.</p>
+
+    <h2>Šta prikupljamo</h2>
+    <ul>
+      <li><strong>Podaci o rođenju:</strong> ime, datum, vreme i mesto rođenja (grad, iz kog se izvode geografska širina/dužina i vremenska zona). Bez ovoga karta ne može da se izračuna.</li>
+      <li><strong>Nalog:</strong> tvoj email — samo ako se prijaviš (email kodom, Apple ili Google nalogom).</li>
+      <li><strong>Ono što ti upišeš:</strong> beleške u dnevniku i podaci o partneru koje uneseš za proveru kompatibilnosti.</li>
+      <li><strong>Korišćenje:</strong> kojih dana si izvukla kartu (za niz/streak), izbor jezika, podešavanje podsetnika i saglasnost za marketing.</li>
+      <li><strong>Pretplata:</strong> status TĀRĀ+ pretplate. Podatke o kartici obrađuju Apple/Google i RevenueCat — mi ih nikad ne vidimo.</li>
+    </ul>
+
+    <h2>Gde se podaci čuvaju</h2>
+    <p>Podaci o rođenju i partneru prvo se čuvaju <strong>lokalno na tvom uređaju</strong>. Ako se prijaviš, tvoj profil se sinhronizuje sa našom bazom (Supabase) da bi bio dostupan na više uređaja. Dnevnik i istorija izvlačenja čuvaju se samo kada si prijavljena.</p>
+
+    <h2>Kome se prosleđuje (obrađivači)</h2>
+    <ul>
+      <li><strong>Anthropic (Claude):</strong> da bismo napisali čitanje, šaljemo astrološke faktore izvedene iz tvoje karte (npr. položaje) — <strong>ne</strong> tvoje ime ni email. Izuzetak: kod čitanja za parove šalju se imena koja uneseš. Ulazni podaci preko API-ja se ne koriste za treniranje modela.</li>
+      <li><strong>Supabase:</strong> baza i prijava (autentifikacija).</li>
+      <li><strong>OpenStreetMap (Nominatim):</strong> kad pretražuješ mesto rođenja, tekst koji kucaš šalje se radi pronalaska koordinata.</li>
+      <li><strong>Expo / EAS:</strong> hosting i push-notifikacije.</li>
+      <li><strong>Apple / Google:</strong> prijava i naplata pretplate preko prodavnica aplikacija.</li>
+    </ul>
+
+    <h2>Zašto (pravni osnov)</h2>
+    <p>Podatke o rođenju i nalogu obrađujemo da bismo <strong>pružili uslugu koju si tražila</strong> (ugovor). Marketing (npr. novosti) šaljemo samo uz <strong>tvoju saglasnost</strong>, koju možeš povući u svakom trenutku.</p>
+
+    <h2>Koliko dugo</h2>
+    <p>Čuvamo tvoje podatke dok ne obrišeš nalog. Nalog možeš obrisati unutar aplikacije: <strong>Ti → Obriši nalog</strong> — time se trajno brišu tvoj profil, dnevnik i istorija. Lokalne podatke uklanjaš brisanjem aplikacije.</p>
+
+    <h2>Tvoja prava</h2>
+    <p>Imaš pravo da pristupiš svojim podacima, ispraviš ih, obrišeš, preuzmeš (prenosivost), povučeš saglasnost i uložiš pritužbu nadležnom organu za zaštitu podataka. Za bilo šta od ovoga piši nam na <a href="mailto:privacy@dailytara.com">privacy@dailytara.com</a>.</p>
+
+    <h2>Deca</h2>
+    <p>TĀRĀ nije namenjena osobama mlađim od 16 godina i svesno ne prikupljamo njihove podatke.</p>
+
+    <h2>Bezbednost</h2>
+    <p>Podaci se prenose šifrovano (HTTPS), a pristup bazi je ograničen pravilima na nivou reda (RLS) tako da vidiš samo svoje podatke.</p>
+
+    <h2>Izmene</h2>
+    <p>Ako izmenimo ovu politiku, ažuriraćemo datum na vrhu. Značajne promene najavićemo u aplikaciji.</p>
+
+    <div class="foot"><a href="index.html">← dailytara.com</a> · <a href="terms.html">Uslovi korišćenja</a></div>
+  </div>
+
+  <!-- ================= EN ================= -->
+  <div data-lang="en">
+    <h1>Privacy Policy</h1>
+    <p class="eff">Last updated: 23 July 2026</p>
+    <p class="lead">TĀRĀ writes you a daily reading from your real birth chart. To do that, we need your birth details. This policy explains exactly what we collect, why, and who it is shared with — in plain words.</p>
+
+    <h2>Who we are</h2>
+    <p>TĀRĀ ("we", "us") is an astrology self-reflection app. For privacy questions, email <a href="mailto:privacy@dailytara.com">privacy@dailytara.com</a>.</p>
+
+    <h2>What we collect</h2>
+    <ul>
+      <li><strong>Birth details:</strong> your name, date, time and place of birth (city, from which latitude/longitude and time zone are derived). Without these, the chart cannot be calculated.</li>
+      <li><strong>Account:</strong> your email — only if you sign in (by email code, Apple or Google).</li>
+      <li><strong>What you write:</strong> journal notes and any partner details you enter for compatibility.</li>
+      <li><strong>Usage:</strong> which days you drew a card (for your streak), language choice, reminder setting and marketing consent.</li>
+      <li><strong>Subscription:</strong> your TĀRĀ+ status. Card details are handled by Apple/Google and RevenueCat — we never see them.</li>
+    </ul>
+
+    <h2>Where data is stored</h2>
+    <p>Birth and partner details are first stored <strong>locally on your device</strong>. If you sign in, your profile syncs to our database (Supabase) so it is available across devices. Journal and draw history are stored only while you are signed in.</p>
+
+    <h2>Who it is shared with (processors)</h2>
+    <ul>
+      <li><strong>Anthropic (Claude):</strong> to write a reading we send the astrological factors derived from your chart (e.g. positions) — <strong>not</strong> your name or email. Exception: couple readings include the first names you enter. API inputs are not used to train the model.</li>
+      <li><strong>Supabase:</strong> database and authentication.</li>
+      <li><strong>OpenStreetMap (Nominatim):</strong> when you search a birthplace, the text you type is sent to look up coordinates.</li>
+      <li><strong>Expo / EAS:</strong> hosting and push notifications.</li>
+      <li><strong>Apple / Google:</strong> sign-in and subscription billing via the app stores.</li>
+    </ul>
+
+    <h2>Why (legal basis)</h2>
+    <p>We process your birth and account data to <strong>provide the service you asked for</strong> (contract). We send marketing (e.g. news) only with <strong>your consent</strong>, which you can withdraw at any time.</p>
+
+    <h2>How long</h2>
+    <p>We keep your data until you delete your account. You can delete your account inside the app: <strong>You → Delete account</strong> — this permanently removes your profile, journal and history. Local data is removed by deleting the app.</p>
+
+    <h2>Your rights</h2>
+    <p>You have the right to access, correct, delete, export (portability) and withdraw consent, and to complain to a data-protection authority. For any of these, email <a href="mailto:privacy@dailytara.com">privacy@dailytara.com</a>.</p>
+
+    <h2>Children</h2>
+    <p>TĀRĀ is not intended for anyone under 16, and we do not knowingly collect their data.</p>
+
+    <h2>Security</h2>
+    <p>Data is transmitted encrypted (HTTPS), and database access is restricted by row-level security so you only see your own data.</p>
+
+    <h2>Changes</h2>
+    <p>If we change this policy, we will update the date at the top. We will announce significant changes in the app.</p>
+
+    <div class="foot"><a href="index.html">← dailytara.com</a> · <a href="terms.html">Terms of Use</a></div>
+  </div>
+</main>
+
+<script>
+  (function(){
+    var btns = document.querySelectorAll('.langs button');
+    var blocks = document.querySelectorAll('[data-lang]');
+    function set(lang){
+      btns.forEach(function(b){ b.classList.toggle('on', b.dataset.set===lang); });
+      blocks.forEach(function(x){ x.classList.toggle('show', x.dataset.lang===lang); });
+      document.documentElement.lang = lang;
+      try{ localStorage.setItem('tara_legal_lang', lang); }catch(e){}
+    }
+    btns.forEach(function(b){ b.addEventListener('click', function(){ set(b.dataset.set); }); });
+    var saved; try{ saved = localStorage.getItem('tara_legal_lang'); }catch(e){}
+    set(saved==='en' ? 'en' : 'sr');
+  })();
+</script>
+</body>
+</html>
