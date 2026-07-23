@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TĀRĀ · the sky knows you</title>
-<meta name="description" content="A daily reading written for you, from your real birth chart. Precise to your exact minute and place of birth, in clear words, only yours.">
+<meta name="description" content="I'm Tara. Every day I write you a reading from your real birth chart — precise, clear, only yours.">
 <meta property="og:title" content="TĀRĀ · the sky knows you">
-<meta property="og:description" content="A daily reading written for you, from your real birth chart. Precise, clear and only yours.">
+<meta property="og:description" content="I'm Tara. Every day I write you a reading from your real birth chart — precise, clear, only yours.">
 <meta property="og:image" content="og-image.png">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="favicon.png">
@@ -266,6 +266,13 @@
   footer .flinks a{color:var(--muted); text-decoration:none; transition:color .2s}
   footer .flinks a:hover{color:var(--gold)}
 
+  /* ---------- meet Tara (first-person intro) ---------- */
+  .meet{max-width:640px; margin:0 auto; padding:30px 26px 4px; text-align:center}
+  .meet-lead{font-family:var(--disp); font-weight:500; font-size:22px; line-height:1.42; color:var(--text); text-wrap:balance}
+  .meet-myth{font-family:var(--body); font-size:15px; line-height:1.6; color:var(--muted); margin-top:14px; font-style:italic; text-wrap:balance}
+  @media(max-width:560px){ .meet-lead{font-size:18.5px} }
+  footer .fsign{font-family:var(--disp); font-weight:500; font-size:12px; letter-spacing:.12em; color:var(--gold)}
+
   /* reveal on scroll */
   .rv{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease}
   .rv.in{opacity:1; transform:none}
@@ -302,6 +309,12 @@
   <p data-i18n="heroSub">A daily reading written for you, from your real birth chart. Precise, clear and only yours.</p>
   <a class="cta big fill" data-i18n="tryBig" href="https://tara.expo.app">Open TĀRĀ, it's free</a>
   <div class="scroll-hint" data-i18n="scrollHint">scroll to let the sky unfold</div>
+</section>
+
+<!-- MEET TARA -->
+<section class="meet">
+  <p class="meet-lead" data-i18n="meetLead">I'm Tara. Every morning I write you your sky — in your words, only yours.</p>
+  <p class="meet-myth" data-i18n="meetMyth">Tārā means star. In the old tradition, she's the one who guides you — never the one who frightens you.</p>
 </section>
 
 <!-- JOURNEY -->
@@ -526,6 +539,7 @@
 
 <footer>
   <div class="fmark">TĀRĀ</div>
+  <div class="fsign">— Tara ✶</div>
   <div class="fnote" data-i18n="footNote">© 2026 TĀRĀ · the sky knows you</div>
   <div class="flinks">
     <a href="privacy.html" data-i18n="footPrivacy">Privacy</a>
@@ -539,18 +553,20 @@ const L = {
   en: {
     try:"Try TĀRĀ free", tryBig:"Open TĀRĀ, it's free",
     typeLine:"The sky knows you.",
-    heroSub:"A daily reading written for you, from your real birth chart. Precise, clear and only yours.",
+    heroSub:"I put it into words — from your real birth chart, precise, clear, only yours.",
     scrollHint:"scroll to let the sky unfold",
+    meetLead:"I'm Tara. Every morning I write you your sky — in your words, only yours.",
+    meetMyth:"Tārā means star. In the old tradition, she's the one who guides you — never the one who frightens you.",
     cap1h:"It begins the moment you were born.",
     cap1p:"The sky above held a pattern that belongs only to you. Not a horoscope for millions. Yours.",
-    cap2h:"TĀRĀ reads that pattern:", cap2k:"the real astronomy of it.",
+    cap2h:"I read that pattern:", cap2k:"the real astronomy of it.",
     cap2p:"Precise positions, ancient Jyotish wisdom, computed for your exact minute and place of birth.",
-    cap3h:"…and turns it into words a friend would say.",
+    cap3h:"…and turn it into words a friend would say.",
     cap3p:"No jargon. No planets to decode. Just you, seen clearly.",
     phoneSub:"the sky knows you", phoneCard:"Card of the day", phoneCardSub:"one draw · the sky has decided",
     g1:"roots", g2:"love", g3:"path", g4:"growth", g5:"balance",
     featEyebrow:"what's inside", featTitle:"A small daily ritual, with real depth underneath.",
-    f1h:"Card of the day", f1p:"One draw each day: a short, warm reading of what this day carries for you. Keep a streak, jot a line in your moon journal.", f1t:"free · every day",
+    f1h:"Card of the day", f1p:"One draw each day: I give you a short, warm reading of what this day carries for you. Keep a streak, jot a line in your moon journal.", f1t:"free · every day",
     f2h:"The five gateways", f2p:"Love, work, roots, inner growth and balance: five fields of life, each with a deep personal reading written from your chart.", f2t:"one gate free daily",
     f3h:"Your chart", f3p:"For the curious: your full map is there too. Birth chart, navamsa and planetary periods. Real Vedic astronomy, beautifully drawn.", f3t:"for the curious",
     f4h:"Look back", f4p:"Your last 30 days, read from the sky: where you moved with ease, where you needed more patience, and the theme running through it all.", f4t:"every month",
@@ -564,10 +580,10 @@ const L = {
     loreP3:"Unique to Jyotish are the Dashas: time cycles that divide your life into distinct chapters, each ruled by a different planet. A precise mathematical framework, refined over thousands of years.",
     loreClose:"Same sky. Read deeper.",
     howEyebrow:"how it works", howTitle:"Three steps, then the sky does the talking.",
-    s1h:"Tell TĀRĀ when you arrived", s1p:"Date, time and place of birth. Don't know the exact time? TĀRĀ reads from the Moon instead. It still works.",
-    s2h:"TĀRĀ computes your sky", s2p:"A real ephemeris calculates where everything stood at your first breath, the same math astronomers use.",
-    s3h:"You get words, not symbols", s3p:"Every reading is written for you like a wise friend would speak: concrete, kind and about your life, not the sky's.",
-    sampleEyebrow:"a real reading", sampleTitle:"This is how TĀRĀ speaks.",
+    s1h:"Tell me when you arrived", s1p:"Date, time and place of birth. Don't know the exact time? I'll read from the Moon instead. It still works.",
+    s2h:"I compute your sky", s2p:"A real ephemeris finds where everything stood at your first breath, the same math astronomers use.",
+    s3h:"You get words, not symbols", s3p:"I write every reading for you like a wise friend would speak: concrete, kind, about your life.",
+    sampleEyebrow:"a real reading", sampleTitle:"This is how I speak.",
     quote:"“Here's the thing about you: your sense of self was never meant to be found alone in a quiet room. You find out who you are by being in the room, in the conversation, in the middle of something bigger than yourself. And here's the tender part: the piece of you that's supposed to feel like home doesn't come automatically. You get to build it. Often through your own two hands.”",
     quoteCap:"From a Roots and Identity gateway reading",
     plusP:"TĀRĀ+ opens the deeper readings: all five gateways, your monthly look-back, your life chapters and more. New words as the sky keeps moving.",
@@ -578,18 +594,20 @@ const L = {
   sr: {
     try:"Probaj TARU besplatno", tryBig:"Otvori TARU, besplatno je",
     typeLine:"Nebo te već zna.",
-    heroSub:"Dnevno čitanje pisano za tebe, iz tvoje prave natalne karte. Precizno, jasno i samo tvoje.",
+    heroSub:"Ja ti to prevedem u reči — iz tvoje prave natalne karte, precizno, jasno, samo tvoje.",
     scrollHint:"skroluj i pusti nebo da se otvori",
+    meetLead:"Ja sam Tara. Svako jutro ti pišem tvoje nebo — tvojim rečima, samo tvoje.",
+    meetMyth:"Tārā znači zvezda. U drevnoj tradiciji, ona te vodi — nikad te ne plaši.",
     cap1h:"Počinje u trenutku tvog rođenja.",
     cap1p:"Nebo iznad tebe držalo je obrazac koji pripada samo tebi. Ne horoskop za milione. Tvoj.",
-    cap2h:"TĀRĀ čita taj obrazac:", cap2k:"pravu astronomiju iza njega.",
+    cap2h:"Ja čitam taj obrazac:", cap2k:"pravu astronomiju iza njega.",
     cap2p:"Precizne pozicije, drevna džjotiš mudrost, izračunato za tačan minut i mesto tvog rođenja.",
-    cap3h:"…i pretvara ga u reči koje bi ti rekla prijateljica.",
+    cap3h:"…i pretvorim ga u reči kakve bi ti rekla drugarica.",
     cap3p:"Bez žargona. Bez planeta za dešifrovanje. Samo ti, jasno viđena.",
     phoneSub:"nebo te već zna", phoneCard:"Karta dana", phoneCardSub:"jedno izvlačenje · nebo je odlučilo",
     g1:"koren", g2:"ljubav", g3:"put", g4:"razvoj", g5:"balans",
     featEyebrow:"šta te čeka", featTitle:"Mali dnevni ritual, sa pravom dubinom ispod.",
-    f1h:"Karta dana", f1p:"Jedno izvlačenje dnevno: kratko, toplo čitanje o tome šta ovaj dan nosi za tebe. Gradi niz, zapiši red u mesečev dnevnik.", f1t:"besplatno · svaki dan",
+    f1h:"Karta dana", f1p:"Jedno izvlačenje dnevno: dam ti kratko, toplo čitanje onoga što ti dan nosi. Gradi niz, zapiši red u mesečev dnevnik.", f1t:"besplatno · svaki dan",
     f2h:"Pet kapija", f2p:"Ljubav, posao, koren, unutrašnji razvoj i balans: pet polja života, svako sa dubinskim ličnim čitanjem iz tvoje karte.", f2t:"jedna kapija besplatna dnevno",
     f3h:"Tvoja karta", f3p:"Za radoznale: cela mapa je tu. Natalna karta, navamša i planetarni periodi. Prava vedska astronomija, lepo nacrtana.", f3t:"za radoznale",
     f4h:"Osvrt unazad", f4p:"Poslednjih 30 dana, pročitanih iz neba: gde ti je išlo naruku, gde je trebalo više strpljenja, i tema koja se provlačila kroz sve to.", f4t:"svakog meseca",
@@ -603,10 +621,10 @@ const L = {
     loreP3:"Jedinstvene za džjotiš su daše: vremenski ciklusi koji tvoj život dele na jasna poglavlja, svako vođeno drugom planetom. Precizan matematički okvir, usavršavan hiljadama godina.",
     loreClose:"Isto nebo. Samo dublje pročitano.",
     howEyebrow:"kako radi", howTitle:"Tri koraka, a onda nebo priča.",
-    s1h:"Reci TARI kad si stigla", s1p:"Datum, vreme i mesto rođenja. Ne znaš tačno vreme? TĀRĀ tada čita iz Meseca. I dalje radi.",
-    s2h:"TĀRĀ izračuna tvoje nebo", s2p:"Prava efemerida računa gde je sve stajalo pri tvom prvom dahu, ista matematika koju koriste astronomi.",
-    s3h:"Dobijaš reči, ne simbole", s3p:"Svako čitanje je napisano za tebe kao što bi govorila mudra prijateljica: konkretno, blago i o tvom životu, ne o nebu.",
-    sampleEyebrow:"pravo čitanje", sampleTitle:"Ovako TĀRĀ govori.",
+    s1h:"Reci mi kad si stigla na svet", s1p:"Datum, vreme i mesto rođenja. Ne znaš tačno vreme? Čitaću iz Meseca. I dalje radi.",
+    s2h:"Izračunaću tvoje nebo", s2p:"Prava efemerida nađe gde je sve stajalo pri tvom prvom udahu, ista matematika koju koriste astronomi.",
+    s3h:"Dobićeš reči, ne simbole", s3p:"Svako čitanje ti pišem kao što bi ti rekla mudra drugarica: konkretno, s ljubavlju, o tvom životu.",
+    sampleEyebrow:"pravo čitanje", sampleTitle:"Ovako ja govorim.",
     quote:"„Evo šta je stvar sa tobom: tvoj osećaj sebe nikad nije trebalo da se pronađe sama u tihoj sobi. Otkrivaš ko si tako što si u prostoriji, u razgovoru, usred nečega većeg od sebe. A evo i nežnog dela: onaj deo tebe koji bi trebalo da bude dom ne dolazi sam od sebe. Ti ga gradiš. Često sopstvenim rukama.“",
     quoteCap:"Iz čitanja kapije Koren i identitet",
     plusP:"TĀRĀ+ otvara dublja čitanja: svih pet kapija, tvoj mesečni osvrt, poglavlja tvog života i još. Nove reči kako se nebo pomera.",
@@ -617,18 +635,20 @@ const L = {
   de: {
     try:"TĀRĀ kostenlos testen", tryBig:"TĀRĀ öffnen, kostenlos",
     typeLine:"Der Himmel kennt dich.",
-    heroSub:"Eine tägliche Lesung, geschrieben für dich, aus deinem echten Geburtshoroskop. Präzise, klar und nur deins.",
+    heroSub:"Ich bringe ihn in Worte — aus deinem echten Geburtshoroskop, präzise, klar, nur deins.",
     scrollHint:"scrolle und lass den Himmel sich öffnen",
+    meetLead:"Ich bin Tara. Jeden Morgen schreibe ich dir deinen Himmel — in deinen Worten, nur deins.",
+    meetMyth:"Tārā bedeutet Stern. In der alten Tradition ist sie die, die dich führt — nie die, die dich erschreckt.",
     cap1h:"Es beginnt im Moment deiner Geburt.",
     cap1p:"Der Himmel über dir trug ein Muster, das nur dir gehört. Kein Horoskop für Millionen. Deins.",
-    cap2h:"TĀRĀ liest dieses Muster:", cap2k:"die echte Astronomie dahinter.",
+    cap2h:"Ich lese dieses Muster:", cap2k:"die echte Astronomie dahinter.",
     cap2p:"Präzise Positionen, uraltes Jyotish-Wissen, berechnet für deine genaue Minute und deinen Geburtsort.",
-    cap3h:"…und macht daraus Worte, wie sie eine Freundin sagen würde.",
+    cap3h:"…und mache daraus Worte, wie sie eine Freundin sagen würde.",
     cap3p:"Kein Jargon. Keine Planeten zum Entschlüsseln. Nur du, klar gesehen.",
     phoneSub:"der Himmel kennt dich", phoneCard:"Karte des Tages", phoneCardSub:"ein Zug · der Himmel hat entschieden",
     g1:"Wurzeln", g2:"Liebe", g3:"Weg", g4:"Wachstum", g5:"Balance",
     featEyebrow:"was dich erwartet", featTitle:"Ein kleines tägliches Ritual, mit echter Tiefe darunter.",
-    f1h:"Karte des Tages", f1p:"Ein Zug pro Tag: eine kurze, warme Lesung darüber, was dieser Tag für dich trägt. Halte deine Serie, schreib eine Zeile ins Mondtagebuch.", f1t:"kostenlos · jeden Tag",
+    f1h:"Karte des Tages", f1p:"Ein Zug pro Tag: ich gebe dir eine kurze, warme Lesung darüber, was dieser Tag für dich trägt. Halte deine Serie, schreib eine Zeile ins Mondtagebuch.", f1t:"kostenlos · jeden Tag",
     f2h:"Die fünf Tore", f2p:"Liebe, Arbeit, Wurzeln, inneres Wachstum und Balance: fünf Lebensfelder, jedes mit einer tiefen persönlichen Lesung aus deinem Horoskop.", f2t:"ein Tor täglich frei",
     f3h:"Dein Horoskop", f3p:"Für Neugierige: die ganze Karte ist auch da. Geburtshoroskop, Navamsha und Planetenperioden. Echte vedische Astronomie, schön gezeichnet.", f3t:"für Neugierige",
     f4h:"Rückblick", f4p:"Deine letzten 30 Tage, aus dem Himmel gelesen: wo es leicht ging, wo mehr Geduld nötig war, und das Thema, das sich durchzog.", f4t:"jeden Monat",
@@ -642,10 +662,10 @@ const L = {
     loreP3:"Einzigartig für Jyotish sind die Dashas: Zeitzyklen, die dein Leben in klare Kapitel teilen, jedes von einem anderen Planeten geführt. Ein präzises mathematisches Gerüst, über Jahrtausende verfeinert.",
     loreClose:"Derselbe Himmel. Nur tiefer gelesen.",
     howEyebrow:"so funktioniert es", howTitle:"Drei Schritte, dann spricht der Himmel.",
-    s1h:"Sag TĀRĀ, wann du ankamst", s1p:"Datum, Zeit und Ort deiner Geburt. Genaue Zeit unbekannt? Dann liest TĀRĀ vom Mond. Es funktioniert trotzdem.",
-    s2h:"TĀRĀ berechnet deinen Himmel", s2p:"Eine echte Ephemeride berechnet, wo alles bei deinem ersten Atemzug stand, dieselbe Mathematik, die Astronomen nutzen.",
-    s3h:"Du bekommst Worte, keine Symbole", s3p:"Jede Lesung ist für dich geschrieben, wie eine weise Freundin sprechen würde: konkret, freundlich und über dein Leben, nicht über den Himmel.",
-    sampleEyebrow:"eine echte Lesung", sampleTitle:"So spricht TĀRĀ.",
+    s1h:"Sag mir, wann du ankamst", s1p:"Datum, Zeit und Ort deiner Geburt. Genaue Zeit unbekannt? Dann lese ich vom Mond. Es funktioniert trotzdem.",
+    s2h:"Ich berechne deinen Himmel", s2p:"Eine echte Ephemeride findet, wo alles bei deinem ersten Atemzug stand, dieselbe Mathematik, die Astronomen nutzen.",
+    s3h:"Du bekommst Worte, keine Symbole", s3p:"Jede Lesung schreibe ich für dich, wie eine weise Freundin sprechen würde: konkret, freundlich, über dein Leben.",
+    sampleEyebrow:"eine echte Lesung", sampleTitle:"So spreche ich.",
     quote:"„Die Sache mit dir ist: Dein Selbstgefühl war nie dafür gedacht, allein in einem stillen Zimmer gefunden zu werden. Du findest heraus, wer du bist, indem du im Raum bist, im Gespräch, mitten in etwas Größerem als dir selbst. Und hier der zarte Teil: das Stück von dir, das sich wie Zuhause anfühlen soll, kommt nicht von allein. Du darfst es bauen. Oft mit deinen eigenen Händen.“",
     quoteCap:"Aus einer Lesung des Tores Wurzeln und Identität",
     plusP:"TĀRĀ+ öffnet die tieferen Lesungen: alle fünf Tore, deinen monatlichen Rückblick, deine Lebenskapitel und mehr. Neue Worte, während der Himmel weiterzieht.",
