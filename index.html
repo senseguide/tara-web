@@ -958,7 +958,7 @@ addEventListener("resize", () => { clearTimeout(starTO); starTO = setTimeout(sta
     stars = Array.from({ length: Math.max(120, Math.min(n, 320)) }, () => ({
       x: Math.random() * w, y: Math.random() * h, s: 0.6 + Math.random() * 1.9,
       c: COLORS[(Math.random() * COLORS.length) | 0], tw: Math.random() * 6.28,
-      tws: 0.6 + Math.random() * 1.1, vx: (Math.random() - 0.5) * 0.05, vy: (Math.random() - 0.5) * 0.05,
+      tws: 0.6 + Math.random() * 1.1, vx: (Math.random() - 0.5) * 0.18, vy: (Math.random() - 0.5) * 0.18,
     }));
   }
   // A burst of stars that fly in from the edges and gather into an ellipse
@@ -982,7 +982,7 @@ addEventListener("resize", () => { clearTimeout(starTO); starTO = setTimeout(sta
       st.x += st.vx; st.y += st.vy;
       if (st.x < 0) st.x += w; else if (st.x > w) st.x -= w;
       if (st.y < 0) st.y += h; else if (st.y > h) st.y -= h;
-      c.globalAlpha = 0.35 + 0.45 * (0.5 + 0.5 * Math.sin(now / 700 * st.tws + st.tw));
+      c.globalAlpha = 0.28 + 0.58 * (0.5 + 0.5 * Math.sin(now / 420 * st.tws + st.tw));
       c.fillStyle = st.c;
       c.beginPath(); c.arc(st.x, st.y, st.s, 0, 6.283); c.fill();
     }
@@ -1014,7 +1014,7 @@ addEventListener("resize", () => { clearTimeout(starTO); starTO = setTimeout(sta
       if (!running){ running = true; raf = requestAnimationFrame(frame); }
       if (!lit){ lit = true; head.classList.add("lit"); burst(); }
     } else if (running){ running = false; cancelAnimationFrame(raf); }
-  }), { threshold: 0.3 }).observe(sec);
+  }), { threshold: 0.12 }).observe(sec);
   let ftO;
   addEventListener("resize", () => { clearTimeout(ftO); ftO = setTimeout(size, 200); });
 })();
