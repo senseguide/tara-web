@@ -295,8 +295,8 @@
   <a class="wordmark" href="#hero">TĀRĀ</a>
   <div class="head-right">
     <nav class="langs" aria-label="Language">
-      <button data-lang="en">EN</button>
       <button data-lang="sr">SR</button>
+      <button data-lang="en">EN</button>
       <button data-lang="de">DE</button>
     </nav>
     <a class="cta" data-i18n="try" href="https://tara.expo.app">Try TĀRĀ free</a>
@@ -692,6 +692,8 @@ function applyLang(l) {
     }
   });
   document.querySelectorAll(".langs button").forEach(b => b.classList.toggle("on", b.dataset.lang === l));
+  // Carry the chosen language into the app so it opens in the same language.
+  document.querySelectorAll('a[href^="https://tara.expo.app"]').forEach(a => { a.href = "https://tara.expo.app/?lang=" + l; });
   restartType(dict.typeLine);
 }
 document.querySelectorAll(".langs button").forEach(b => b.addEventListener("click", () => applyLang(b.dataset.lang)));
