@@ -718,6 +718,11 @@ const io = new IntersectionObserver(es => es.forEach(e => {
 }), { threshold: 0.18 });
 document.querySelectorAll(".rv").forEach(el => io.observe(el));
 
+/* Apply language + start the typewriter BEFORE the heavier canvas setup, so the
+ * page's real content always renders even if the animation layer ever throws on
+ * some browser. Animations below are progressive enhancement. */
+applyLang(lang);
+
 /* ================= particle journey ================= */
 const canvas = document.getElementById("sky");
 const ctx = canvas.getContext("2d");
@@ -869,8 +874,6 @@ function frame(t) {
 }
 if (!reduced) raf = requestAnimationFrame(frame);
 else { caps.forEach(c => c.style.opacity = 1); phone.classList.add("show"); }
-
-applyLang(lang);
 
 /* ================= constellation card frames ================= */
 const SVGNS = "http://www.w3.org/2000/svg";
