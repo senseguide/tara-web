@@ -1030,5 +1030,21 @@ addEventListener("resize", () => { clearTimeout(starTO); starTO = setTimeout(sta
   addEventListener("resize", () => { clearTimeout(ftO); ftO = setTimeout(size, 200); });
 })();
 </script>
+<script>
+/* An invite link arrives here as dailytara.com/?i=CODE, but every button on
+   this page opens the app on another host, so the code has to be carried
+   across or the invite is never counted. Nothing is stored and nothing is
+   sent: the parameter is only appended to the app links already on the page. */
+(function () {
+  var code = (location.search.match(/[?&]i=([A-Za-z0-9]{6})\b/) || [])[1];
+  if (!code) return;
+  var links = document.querySelectorAll('a[href^="https://tara.expo.app"]');
+  for (var i = 0; i < links.length; i++) {
+    var u = new URL(links[i].href);
+    u.searchParams.set("i", code.toUpperCase());
+    links[i].href = u.toString();
+  }
+})();
+</script>
 </body>
 </html>
