@@ -313,7 +313,7 @@
       <button data-lang="en">EN</button>
       <button data-lang="de">DE</button>
     </nav>
-    <a class="cta" data-i18n="try" href="https://tara.expo.app">Try TĀRĀ free</a>
+    <a class="cta" data-i18n="try" href="https://app.dailytara.com">Try TĀRĀ free</a>
   </div>
 </header>
 
@@ -321,7 +321,7 @@
 <section id="hero">
   <p class="meet-lead" data-i18n="meetLead">I'm Tara. Every morning I read you your sky. Clear, bright and only yours.</p>
   <p class="meet-myth" data-i18n="meetMyth">Tārā means star. In the old tradition, she's the one who guides you and lights your way.</p>
-  <a class="cta big fill" data-i18n="tryBig" href="https://tara.expo.app">Open TĀRĀ, it's free</a>
+  <a class="cta big fill" data-i18n="tryBig" href="https://app.dailytara.com">Open TĀRĀ, it's free</a>
   <h1 class="hero-line"><span id="type"></span><span class="cursor" aria-hidden="true"></span></h1>
   <div class="scroll-hint" data-i18n="scrollHint">scroll to let the sky unfold</div>
 </section>
@@ -534,7 +534,7 @@
       <p data-i18n="plusP">TĀRĀ+ opens the deeper readings: all five gateways, your monthly look-back, your life chapters and more. New words as the sky keeps moving.</p>
       <div class="price" data-i18n="plusPrice">€4.99 / month · €39.99 / year</div>
     </div>
-    <a class="cta big" data-i18n="plusCta" href="https://tara.expo.app">Start free</a>
+    <a class="cta big" data-i18n="plusCta" href="https://app.dailytara.com">Start free</a>
   </div>
 </section>
 
@@ -543,7 +543,7 @@
   <canvas id="finalsky" aria-hidden="true"></canvas>
   <h2 class="emerge" data-i18n="finalH">The sky already knows you.<br>Come meet it.</h2>
   <p class="rv" data-i18n="finalP">Free to try. Works in your browser, right now.</p>
-  <a class="cta big fill rv" data-i18n="finalCta" href="https://tara.expo.app">Open TĀRĀ</a>
+  <a class="cta big fill rv" data-i18n="finalCta" href="https://app.dailytara.com">Open TĀRĀ</a>
 </section>
 
 <footer>
@@ -702,7 +702,14 @@ function applyLang(l) {
   });
   document.querySelectorAll(".langs button").forEach(b => b.classList.toggle("on", b.dataset.lang === l));
   // Carry the chosen language into the app so it opens in the same language.
-  document.querySelectorAll('a[href^="https://tara.expo.app"]').forEach(a => { a.href = "https://tara.expo.app/?lang=" + l; });
+  // Built with URL rather than by rewriting the whole href: an invite arrives as
+  // ?i=CODE and is appended to these same links, and rebuilding the address from
+  // scratch used to throw that away the moment anyone picked a language.
+  document.querySelectorAll('a[href^="https://app.dailytara.com"]').forEach(a => {
+    var u = new URL(a.href);
+    u.searchParams.set("lang", l);
+    a.href = u.toString();
+  });
   restartType(dict.typeLine);
 }
 document.querySelectorAll(".langs button").forEach(b => b.addEventListener("click", () => applyLang(b.dataset.lang)));
@@ -1038,7 +1045,7 @@ addEventListener("resize", () => { clearTimeout(starTO); starTO = setTimeout(sta
 (function () {
   var code = (location.search.match(/[?&]i=([A-Za-z0-9]{6})\b/) || [])[1];
   if (!code) return;
-  var links = document.querySelectorAll('a[href^="https://tara.expo.app"]');
+  var links = document.querySelectorAll('a[href^="https://app.dailytara.com"]');
   for (var i = 0; i < links.length; i++) {
     var u = new URL(links[i].href);
     u.searchParams.set("i", code.toUpperCase());
