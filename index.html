@@ -291,6 +291,8 @@
   .rv{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease}
   .rv.in{opacity:1; transform:none}
 
+  .journey-cta{ text-align:center; margin:8px auto 72px; }
+
   @media (prefers-reduced-motion: reduce){
     *{animation:none!important; transition:none!important}
     html{scroll-behavior:auto}
@@ -321,7 +323,6 @@
 <section id="hero">
   <p class="meet-lead" data-i18n="meetLead">I'm Tara. Every morning I read you your sky. Clear, bright and only yours.</p>
   <p class="meet-myth" data-i18n="meetMyth">Tārā means star. In the old tradition, she's the one who guides you and lights your way.</p>
-  <a class="cta big fill" data-i18n="tryBig" href="https://app.dailytara.com">Open TĀRĀ, it's free</a>
   <h1 class="hero-line"><span id="type"></span><span class="cursor" aria-hidden="true"></span></h1>
   <div class="scroll-hint" data-i18n="scrollHint">scroll to let the sky unfold</div>
 </section>
@@ -392,6 +393,14 @@
       </div>
     </div>
   </div>
+</div>
+
+<!-- The invitation comes after the journey, not before it: the button used to
+     sit in the hero and ask for a decision from someone who had not yet been
+     shown a single thing. Here it arrives as the consequence of what was just
+     watched. `rv` fades it in with everything else that reveals on scroll. -->
+<div class="journey-cta rv">
+  <a class="cta big fill" data-i18n="tryBig" href="https://app.dailytara.com">Open TĀRĀ, it's free</a>
 </div>
 
 <!-- LORE: Jyotish vs Western -->
