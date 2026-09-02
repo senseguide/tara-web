@@ -303,11 +303,13 @@
     #journey{height:auto}
     .stage{position:static; height:auto; min-height:0; overflow:visible;
       display:flex; flex-direction:column; align-items:center; gap:40px; padding:40px 0}
-    .caption{position:static; transform:none; opacity:1!important; margin:0; pointer-events:auto}
+    .caption, .caption.show{position:static!important; transform:none!important; opacity:1!important;
+      margin:0!important; pointer-events:auto}
     /* #phone.show outranks a bare #phone, so the scroll script's transform kept
        shifting the phone by half its own size even in this flat layout, which
        is what put it on top of the words. Both are answered here. */
-    #phone, #phone.show{position:static; transform:none; opacity:1; margin:0; max-height:none}
+    #phone, #phone.show{position:static!important; transform:none!important; opacity:1!important;
+      margin:0!important; max-height:none!important}
   }
 </style>
 </head>
