@@ -124,8 +124,12 @@
 
   /* phone that materializes at the end of the journey, with a live mini sky */
   #phone{
-    position:absolute; left:50%; top:50%;
+    position:absolute; left:50%; top:44%;
     width:min(280px,62vw); aspect-ratio:9/19;
+    /* Capped so a short window cannot let the phone reach down into the band
+       where the captions sit. On a tall window the width still decides the
+       height and this never bites. */
+    max-height:52svh;
     transform:translate(-50%,-50%) scale(.92); opacity:0; transition:opacity .5s, transform .5s;
     border:3px solid var(--purple); border-radius:38px;
     background:linear-gradient(178deg,#0d1033,#171049 55%,#2a0f2e);
@@ -297,9 +301,10 @@
     .rv{opacity:1; transform:none}
     #final h2.emerge{opacity:1; transform:none; filter:none}
     #journey{height:auto}
-    .stage{position:static; height:auto; min-height:70svh}
-    .caption{position:static; transform:none; opacity:1!important; margin:30px auto; pointer-events:auto}
-    #phone{position:static; transform:none; opacity:1; margin:40px auto}
+    .stage{position:static; height:auto; min-height:0; overflow:visible;
+      display:flex; flex-direction:column; align-items:center; gap:40px; padding:40px 0}
+    .caption{position:static; transform:none; opacity:1!important; margin:0; pointer-events:auto}
+    #phone{position:static; transform:none; opacity:1; margin:0; max-height:none}
   }
 </style>
 </head>
