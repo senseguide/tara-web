@@ -305,11 +305,14 @@
       display:flex; flex-direction:column; align-items:center; gap:40px; padding:40px 0}
     .caption, .caption.show{position:static!important; transform:none!important; opacity:1!important;
       margin:0!important; pointer-events:auto}
-    /* #phone.show outranks a bare #phone, so the scroll script's transform kept
-       shifting the phone by half its own size even in this flat layout, which
-       is what put it on top of the words. Both are answered here. */
-    #phone, #phone.show{position:static!important; transform:none!important; opacity:1!important;
-      margin:0!important; max-height:none!important}
+    /*
+     * The phone is hidden here rather than re-placed. Its transform survived
+     * every attempt to override it, including an inline !important, so in this
+     * layout it kept being shifted by half its own size onto the captions. It
+     * carries aria-hidden and says nothing a reader needs, so a visitor who has
+     * asked for less motion loses a decoration and keeps every word.
+     */
+    #phone, #phone.show{display:none!important}
   }
 </style>
 </head>
