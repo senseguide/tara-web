@@ -58,13 +58,36 @@
     font-family:var(--disp); font-weight:900; font-size:20px; letter-spacing:.42em;
     text-shadow:0 0 22px rgba(242,176,53,.55); text-decoration:none;
   }
-  .head-right{display:flex; align-items:center; gap:14px}
-  .langs{display:flex; border:1.5px solid var(--border); border-radius:99px; overflow:hidden}
+  .head-right{display:flex; align-items:center; gap:12px}
+  /* One language showing, the rest a tap away. All three side by side ate the
+     width the "open the app" button needed, and that button was being hidden on
+     phones to make room, which left a phone with no way in above the fold. */
+  .langs{position:relative}
   .langs button{
-    font-family:var(--mono); font-size:11px; letter-spacing:.08em; padding:7px 12px;
+    font-family:var(--mono); font-size:11px; letter-spacing:.08em;
     background:none; border:none; color:var(--muted); cursor:pointer; transition:color .2s;
   }
-  .langs button.on{color:var(--gold)}
+  .langs .lang-now{
+    display:flex; align-items:center; gap:5px; padding:7px 11px;
+    border:1.5px solid var(--border); border-radius:99px; color:var(--gold);
+  }
+  .langs .lang-now::after{
+    content:""; width:0; height:0; border-left:3.5px solid transparent;
+    border-right:3.5px solid transparent; border-top:4px solid currentColor;
+    opacity:.75; transition:transform .2s;
+  }
+  .langs.open .lang-now::after{transform:rotate(180deg)}
+  .lang-menu{
+    position:absolute; top:calc(100% + 8px); right:0; z-index:60;
+    display:none; flex-direction:column; min-width:72px; overflow:hidden;
+    border:1.5px solid var(--border); border-radius:12px;
+    background:rgba(13,16,51,.96);
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  }
+  .langs.open .lang-menu{display:flex}
+  .lang-menu button{padding:9px 14px; text-align:left}
+  .lang-menu button.on{color:var(--gold)}
+  .lang-menu button:hover{color:var(--text)}
   .cta, .cta:visited{
     font-family:var(--body); font-weight:700; font-size:13.5px; text-decoration:none;
     color:var(--gold); border:2px solid var(--gold); border-radius:99px;
@@ -75,7 +98,15 @@
   .cta.big{font-size:16px; padding:14px 34px}
   .cta.fill{background:var(--gold); color:var(--bg0)}
   .cta.fill:hover{background:#f7c565}
-  @media(max-width:560px){ .head-right .cta{display:none} }
+  .cta .short{display:none}
+  @media(max-width:560px){
+    header{padding:14px 16px}
+    .wordmark{font-size:17px; letter-spacing:.34em}
+    .head-right{gap:8px}
+    .cta{font-size:12.5px; padding:8px 15px}
+    .cta .full{display:none}
+    .cta .short{display:inline}
+  }
 
   /* ---------- hero ---------- */
   #hero{
@@ -98,7 +129,15 @@
   .scroll-hint{
     position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
     font-family:var(--mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted);
+    text-align:center;
     animation:bob 2.4s ease-in-out infinite;
+  }
+  /* A chevron under the words. The hint was text only, and a phone reader who
+     did not stop to read it had nothing telling them the page continues. */
+  .scroll-hint::after{
+    content:""; display:block; width:9px; height:9px; margin:9px auto 0;
+    border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor;
+    transform:rotate(45deg); opacity:.85;
   }
   @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
 
@@ -310,12 +349,15 @@
 <header>
   <a class="wordmark" href="#hero">TĀRĀ</a>
   <div class="head-right">
-    <nav class="langs" aria-label="Language">
-      <button data-lang="sr">SR</button>
-      <button data-lang="en">EN</button>
-      <button data-lang="de">DE</button>
+    <nav class="langs" id="langs" aria-label="Language">
+      <button class="lang-now" id="langNow" aria-haspopup="true" aria-expanded="false">EN</button>
+      <div class="lang-menu" id="langMenu">
+        <button data-lang="sr">SR</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="de">DE</button>
+      </div>
     </nav>
-    <a class="cta" data-i18n="try" href="https://app.dailytara.com">Try TĀRĀ free</a>
+    <a class="cta" href="https://app.dailytara.com"><span class="full" data-i18n="try">Try TĀRĀ free</span><span class="short" data-i18n="tryShort">Open</span></a>
   </div>
 </header>
 
@@ -557,7 +599,7 @@
 /* ================= i18n ================= */
 const L = {
   en: {
-    try:"Try TĀRĀ free", tryBig:"Open TĀRĀ, it's free",
+    try:"Try TĀRĀ free", tryShort:"Open", tryBig:"Open TĀRĀ, it's free",
     typeLine:"The sky knows you.",
     heroSub:"I put it into words — from your real birth chart, precise, clear, only yours.",
     scrollHint:"scroll to let the sky unfold",
@@ -595,7 +637,7 @@ const L = {
     footNote:"© 2026 TĀRĀ · the sky knows you", footPrivacy:"Privacy", footTerms:"Terms"
   },
   sr: {
-    try:"Probaj TARU besplatno", tryBig:"Otvori TARU, besplatno je",
+    try:"Probaj TARU besplatno", tryShort:"Otvori", tryBig:"Otvori TARU, besplatno je",
     typeLine:"Nebo te već zna.",
     heroSub:"Ja ti to prevedem u reči — iz tvoje prave natalne karte, precizno, jasno, samo tvoje.",
     scrollHint:"skroluj i pusti nebo da se otvori",
@@ -633,7 +675,7 @@ const L = {
     footNote:"© 2026 TĀRĀ · nebo te već zna", footPrivacy:"Privatnost", footTerms:"Uslovi"
   },
   de: {
-    try:"TĀRĀ kostenlos testen", tryBig:"TĀRĀ öffnen, kostenlos",
+    try:"TĀRĀ kostenlos testen", tryShort:"Öffnen", tryBig:"TĀRĀ öffnen, kostenlos",
     typeLine:"Der Himmel kennt dich.",
     heroSub:"Ich bringe ihn in Worte — aus deinem echten Geburtshoroskop, präzise, klar, nur deins.",
     scrollHint:"scrolle und lass den Himmel sich öffnen",
@@ -688,7 +730,8 @@ function applyLang(l) {
       if (key === "finalH") el.innerHTML = dict[key]; else el.textContent = dict[key];
     }
   });
-  document.querySelectorAll(".langs button").forEach(b => b.classList.toggle("on", b.dataset.lang === l));
+  document.querySelectorAll(".lang-menu button").forEach(b => b.classList.toggle("on", b.dataset.lang === l));
+  document.getElementById("langNow").firstChild.nodeValue = l.toUpperCase();
   // Carry the chosen language into the app so it opens in the same language.
   // Built with URL rather than by rewriting the whole href: an invite arrives as
   // ?i=CODE and is appended to these same links, and rebuilding the address from
@@ -700,7 +743,19 @@ function applyLang(l) {
   });
   restartType(dict.typeLine);
 }
-document.querySelectorAll(".langs button").forEach(b => b.addEventListener("click", () => applyLang(b.dataset.lang)));
+const langsEl = document.getElementById("langs");
+const langNow = document.getElementById("langNow");
+function closeLangs(){ langsEl.classList.remove("open"); langNow.setAttribute("aria-expanded", "false"); }
+langNow.addEventListener("click", e => {
+  e.stopPropagation();
+  const open = langsEl.classList.toggle("open");
+  langNow.setAttribute("aria-expanded", String(open));
+});
+document.querySelectorAll(".lang-menu button").forEach(b =>
+  b.addEventListener("click", () => { applyLang(b.dataset.lang); closeLangs(); })
+);
+document.addEventListener("click", e => { if (!langsEl.contains(e.target)) closeLangs(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeLangs(); });
 
 /* ================= typewriter ================= */
 const typeEl = document.getElementById("type");
