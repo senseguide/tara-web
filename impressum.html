@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TĀRĀ · Impressum</title>
+<meta name="robots" content="index,follow">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg0:#0d1033; --bg1:#171049; --bg2:#38102f;
+    --panel:#1b0f30; --border:#3a2d6b; --border-soft:#2c2050;
+    --text:#f4ecff; --text2:#d8c9f2; --muted:#9a8ec2;
+    --gold:#f2b035; --cyan:#27e6ff;
+    --disp:'Unbounded',sans-serif; --body:'Space Grotesk',sans-serif; --mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:var(--body); color:var(--text); line-height:1.62;
+    background:linear-gradient(178deg,var(--bg0) 0%,var(--bg1) 42%,var(--bg2) 100%) fixed;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--gold)}
+  header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 26px; border-bottom:1px solid var(--border-soft);
+    position:sticky; top:0; z-index:10;
+    background:linear-gradient(180deg,rgba(13,16,51,.94),rgba(13,16,51,.72));
+    backdrop-filter:blur(6px);
+  }
+  .wordmark{
+    font-family:var(--disp); font-weight:900; font-size:18px; letter-spacing:.42em;
+    text-shadow:0 0 22px rgba(242,176,53,.55); text-decoration:none; color:var(--text);
+  }
+  .langs{display:flex; border:1.5px solid var(--border); border-radius:99px; overflow:hidden}
+  .langs button{
+    font-family:var(--mono); font-size:11px; letter-spacing:.08em; padding:7px 13px;
+    background:none; border:none; color:var(--muted); cursor:pointer; transition:color .2s;
+  }
+  .langs button.on{color:var(--gold)}
+  main{max-width:720px; margin:0 auto; padding:48px 24px 90px}
+  h1{font-family:var(--disp); font-weight:700; font-size:30px; letter-spacing:.01em; margin-bottom:6px; text-wrap:balance}
+  .eff{font-family:var(--mono); font-size:12px; color:var(--muted); margin-bottom:34px}
+  h2{font-family:var(--disp); font-weight:500; font-size:19px; color:var(--gold); margin:34px 0 10px; text-wrap:balance}
+  p{color:var(--text2); margin-bottom:12px}
+  ul{color:var(--text2); margin:0 0 12px 20px}
+  li{margin-bottom:7px}
+  strong{color:var(--text)}
+  .lead{font-size:16.5px; color:var(--text)}
+  .foot{margin-top:46px; padding-top:22px; border-top:1px solid var(--border-soft); font-size:13px; color:var(--muted)}
+  .foot a{text-decoration:none}
+  [data-lang]{display:none}
+  [data-lang].show{display:block}
+</style>
+</head>
+<body>
+<header>
+  <a class="wordmark" href="index.html">TĀRĀ</a>
+  <div class="langs" role="group" aria-label="Language">
+    <button data-set="sr" class="on">SR</button>
+    <button data-set="en">EN</button>
+    <button data-set="de">DE</button>
+  </div>
+</header>
+
+<main>
+  <!-- ================= SR ================= -->
+  <div data-lang="sr" class="show">
+    <h1>Impresum</h1>
+    <p class="eff">Poslednja izmena: 5. septembar 2026.</p>
+
+    <h2>Pružalac usluge</h2>
+    <p><strong>S ROAD STUDIO</strong><br>vlasnica: Jelena Dabic<br>Popovica 225<br>21208 Sremska Kamenica<br>Srbija</p>
+
+    <h2>Kontakt</h2>
+    <p>E-pošta: <a href="mailto:sroad@gmail.com">sroad@gmail.com</a></p>
+
+    <h2>Odgovornost za sadržaj</h2>
+    <p>Za sadržaj ovog sajta odgovara Jelena Dabic, na gore navedenoj adresi.</p>
+
+    <h2>Rešavanje sporova</h2>
+    <p>Nismo obavezni niti spremni da učestvujemo u postupku rešavanja sporova pred telom za zaštitu potrošača.</p>
+
+    <div class="foot"><a href="index.html">← dailytara.com</a> · <a href="privacy.html">Politika privatnosti</a> · <a href="terms.html">Uslovi korišćenja</a></div>
+  </div>
+
+  <!-- ================= EN ================= -->
+  <div data-lang="en">
+    <h1>Legal notice</h1>
+    <p class="eff">Last updated: 5 September 2026</p>
+
+    <h2>Service provider</h2>
+    <p><strong>S ROAD STUDIO</strong><br>owner: Jelena Dabic<br>Popovica 225<br>21208 Sremska Kamenica<br>Serbia</p>
+
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:sroad@gmail.com">sroad@gmail.com</a></p>
+
+    <h2>Responsible for content</h2>
+    <p>Jelena Dabic, at the address above, is responsible for the content of this site.</p>
+
+    <h2>Dispute resolution</h2>
+    <p>We are neither obliged nor willing to take part in dispute resolution proceedings before a consumer arbitration board.</p>
+
+    <div class="foot"><a href="index.html">← dailytara.com</a> · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></div>
+  </div>
+
+  <!-- ================= DE ================= -->
+  <div data-lang="de">
+    <h1>Impressum</h1>
+    <p class="eff">Zuletzt aktualisiert: 5. September 2026</p>
+
+    <h2>Diensteanbieter</h2>
+    <p><strong>S ROAD STUDIO</strong><br>Inhaberin: Jelena Dabic<br>Popovica 225<br>21208 Sremska Kamenica<br>Serbien</p>
+
+    <h2>Kontakt</h2>
+    <p>E-Mail: <a href="mailto:sroad@gmail.com">sroad@gmail.com</a></p>
+
+    <h2>Verantwortlich für den Inhalt</h2>
+    <p>Verantwortlich für den Inhalt dieser Website ist Jelena Dabic, unter der oben genannten Anschrift.</p>
+
+    <h2>Streitschlichtung</h2>
+    <p>Wir sind nicht verpflichtet und nicht bereit, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+    <div class="foot"><a href="index.html">← dailytara.com</a> · <a href="privacy.html">Datenschutzerklärung</a> · <a href="terms.html">Nutzungsbedingungen</a></div>
+  </div>
+</main>
+
+<script>
+  (function(){
+    var btns = document.querySelectorAll('.langs button');
+    var blocks = document.querySelectorAll('[data-lang]');
+    function set(lang){
+      btns.forEach(function(b){ b.classList.toggle('on', b.dataset.set===lang); });
+      blocks.forEach(function(x){ x.classList.toggle('show', x.dataset.lang===lang); });
+      document.documentElement.lang = lang;
+      try{ localStorage.setItem('tara_legal_lang', lang); }catch(e){}
+    }
+    btns.forEach(function(b){ b.addEventListener('click', function(){ set(b.dataset.set); }); });
+    var saved; try{ saved = localStorage.getItem('tara_legal_lang'); }catch(e){}
+    set(saved==='en' || saved==='de' ? saved : 'sr');
+  })();
+</script>
+</body>
+</html>
