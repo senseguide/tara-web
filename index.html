@@ -123,6 +123,7 @@
   }
   @keyframes blink{50%{opacity:0}}
   #hero .meet-lead{max-width:22ch}
+  #hero .meet-sub{max-width:46ch}
   #hero .meet-myth{max-width:44ch}
   #hero .cta{margin-top:34px}
   #hero .hero-line{margin-top:46px}
@@ -327,6 +328,7 @@
   /* ---------- meet Tara (first-person intro) ---------- */
   .meet{max-width:640px; margin:0 auto; padding:30px 26px 4px; text-align:center}
   .meet-lead{font-family:var(--disp); font-weight:500; font-size:22px; line-height:1.42; color:var(--text); text-wrap:balance}
+  .meet-sub{font-family:var(--body); font-size:15px; line-height:1.6; color:var(--text2); margin-top:14px; text-wrap:balance}
   .meet-myth{font-family:var(--body); font-size:15px; line-height:1.6; color:var(--muted); margin-top:14px; font-style:italic; text-wrap:balance}
   @media(max-width:560px){ .meet-lead{font-size:18.5px} }
   footer .fsign{font-family:var(--disp); font-weight:500; font-size:12px; letter-spacing:.12em; color:var(--gold)}
@@ -335,7 +337,10 @@
   .rv{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease}
   .rv.in{opacity:1; transform:none}
 
-  .journey-cta{ text-align:center; margin:8px auto 72px; }
+  .journey-cta{ text-align:center; margin:22px auto 72px; }
+  /* said quietly: no frame, no icon, just the line */
+  .one-card{ max-width:46ch; margin:8px auto 0; padding:0 24px; text-align:center;
+    font-size:13.5px; line-height:1.6; color:var(--muted); }
 
   @media (prefers-reduced-motion: reduce){
     *{animation:none!important; transition:none!important}
@@ -369,6 +374,7 @@
 <!-- HERO -->
 <section id="hero">
   <p class="meet-lead" data-i18n="meetLead">I'm Tara. Every morning I read you your sky. Clear, bright and only yours.</p>
+  <p class="meet-sub" data-i18n="heroSub">Two minutes each morning. Not a horoscope for millions, a reading computed from the minute you were born.</p>
   <p class="meet-myth" data-i18n="meetMyth">Tārā means star. In the old tradition, she's the one who guides you and lights your way.</p>
   <h1 class="hero-line"><span id="type"></span><span class="cursor" aria-hidden="true"></span></h1>
   <div class="scroll-hint" data-i18n="scrollHint">scroll to let the sky unfold</div>
@@ -448,6 +454,8 @@
      sit in the hero and ask for a decision from someone who had not yet been
      shown a single thing. Here it arrives as the consequence of what was just
      watched. `rv` fades it in with everything else that reveals on scroll. -->
+<p class="one-card rv" data-i18n="oneCard">One card a day, and that's it. TĀRĀ isn't built to keep you here.</p>
+
 <div class="journey-cta rv">
   <a class="cta big fill" data-i18n="tryBig" href="https://app.dailytara.com">Open TĀRĀ, it's free</a>
 </div>
@@ -609,7 +617,8 @@ const L = {
   en: {
     try:"Try TĀRĀ free", tryShort:"Open", tryBig:"Open TĀRĀ, it's free",
     typeLine:"The sky knows you.",
-    heroSub:"I put it into words — from your real birth chart, precise, clear, only yours.",
+    heroSub:"Two minutes each morning. Not a horoscope for millions, a reading computed from the minute you were born.",
+    oneCard:"One card a day, and that's it. TĀRĀ isn't built to keep you here.",
     scrollHint:"scroll to let the sky unfold",
     meetLead:"I'm Tara. Every morning I read you your sky. Clear, bright and only yours.",
     meetMyth:"Tārā means star. In the old tradition, she's the one who guides you and lights your way.",
@@ -650,7 +659,8 @@ const L = {
   sr: {
     try:"Probaj TARU besplatno", tryShort:"Otvori", tryBig:"Otvori TARU, besplatno je",
     typeLine:"Nebo te već zna.",
-    heroSub:"Ja ti to prevedem u reči — iz tvoje prave natalne karte, precizno, jasno, samo tvoje.",
+    heroSub:"Dva minuta svakog jutra. Ne horoskop za milione, nego čitanje izračunato iz minuta tvog rođenja.",
+    oneCard:"Jedna karta dnevno i to je sve. TĀRĀ nije napravljena da te zadrži.",
     scrollHint:"skroluj i pusti nebo da se otvori",
     meetLead:"Ja sam Tara. Svako jutro ti čitam tvoje nebo. Jasno, svetlo i samo tvoje.",
     meetMyth:"Tārā znači zvezda. U drevnoj tradiciji, ona te vodi i osvetljava ti put.",
@@ -691,7 +701,8 @@ const L = {
   de: {
     try:"TĀRĀ kostenlos testen", tryShort:"Öffnen", tryBig:"TĀRĀ öffnen, kostenlos",
     typeLine:"Der Himmel kennt dich.",
-    heroSub:"Ich bringe ihn in Worte — aus deinem echten Geburtshoroskop, präzise, klar, nur deins.",
+    heroSub:"Zwei Minuten jeden Morgen. Kein Horoskop für Millionen, sondern eine Lesung, berechnet aus der Minute deiner Geburt.",
+    oneCard:"Eine Karte am Tag, mehr nicht. TĀRĀ ist nicht dafür gemacht, dich hier zu halten.",
     scrollHint:"scrolle und lass den Himmel sich öffnen",
     meetLead:"Ich bin Tara. Jeden Morgen lese ich dir deinen Himmel. Klar, hell und nur deins.",
     meetMyth:"Tārā bedeutet Stern. In der alten Tradition ist sie die, die dich führt und dir den Weg erhellt.",
