@@ -177,6 +177,7 @@
   #phone .p-sub{font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;color:var(--muted);text-align:center;margin-top:5px;text-transform:uppercase}
 
   .mini-sky{display:block; width:78%; margin:6px auto 0}
+  @media(max-width:560px){ .mini-sky{width:62%} }
   .ms-ring-outer{transform-box:fill-box; transform-origin:center; animation:msSpin 40s linear infinite}
   .ms-ring-inner{transform-box:fill-box; transform-origin:center; animation:msSpin 28s linear infinite reverse}
   @keyframes msSpin{to{transform:rotate(360deg)}}
@@ -191,6 +192,10 @@
   .p-label .star{color:var(--gold); font-size:15px}
   .p-label h4{font-family:var(--disp);font-weight:700;font-size:12px; margin-top:2px}
   .p-label p{font-family:var(--mono);font-size:8px;color:var(--text2);margin-top:4px;letter-spacing:.06em}
+  /* the reading itself: body type, brighter, so it reads as words and not as a
+     caption under the title. The closing line stays mono, smaller and muted. */
+  .p-label .p-read{font-family:var(--body); font-size:9.5px; line-height:1.5; color:var(--text); letter-spacing:0; margin-top:6px}
+  .p-label .p-quiet{font-family:var(--mono); font-size:7.5px; line-height:1.5; color:var(--muted); margin-top:9px}
   .p-chips{display:flex;justify-content:center;gap:6px;margin-top:12px;flex-wrap:wrap}
   .p-chip{font-family:var(--mono);font-size:7.5px;letter-spacing:.08em;padding:5px 9px;border-radius:99px;border:1.5px solid}
   .p-chip:nth-child(1){color:var(--purple);border-color:var(--purple)}
@@ -423,8 +428,10 @@
 
       <div class="p-label">
         <div class="star">✶</div>
-        <h4 data-i18n="phoneCard">Card of the day</h4>
-        <p data-i18n="phoneCardSub">one draw · the sky has decided</p>
+        <h4 data-i18n="phoneCard">Card of the day · roots</h4>
+        <p class="p-read" data-i18n="phoneRead1">A day to come back to yourself, not to prove anything.</p>
+        <p class="p-read" data-i18n="phoneRead2">Something you thought you'd lost is still here.</p>
+        <p class="p-quiet" data-i18n="phoneQuiet">This is today's. Tomorrow's is different and it's yours.</p>
       </div>
       <div class="p-chips">
         <span class="p-chip" data-i18n="g1">roots</span>
@@ -612,7 +619,10 @@ const L = {
     cap2p:"Precise positions, ancient Jyotish wisdom, computed for your exact minute and place of birth.",
     cap3h:"…and turn it into words a friend would say.",
     cap3p:"No jargon. No planets to decode. Just you, seen clearly.",
-    phoneSub:"the sky knows you", phoneCard:"Card of the day", phoneCardSub:"one draw · the sky has decided",
+    phoneSub:"the sky knows you", phoneCard:"Card of the day · roots",
+    phoneRead1:"A day to come back to yourself, not to prove anything.",
+    phoneRead2:"Something you thought you'd lost is still here.",
+    phoneQuiet:"This is today's. Tomorrow's is different and it's yours.",
     g1:"roots", g2:"love", g3:"path", g4:"growth", g5:"balance",
     featEyebrow:"what's inside", featTitle:"A small daily ritual, with real depth underneath.",
     f1h:"Card of the day", f1p:"One draw each day: I give you a short, warm reading of what this day carries for you. Keep a streak, jot a line in your moon journal.", f1t:"free · every day",
@@ -650,7 +660,10 @@ const L = {
     cap2p:"Precizne pozicije, drevna džjotiš mudrost, izračunato za tačan minut i mesto tvog rođenja.",
     cap3h:"…i pretvorim ga u reči kakve bi ti rekla drugarica.",
     cap3p:"Bez žargona. Bez planeta za dešifrovanje. Samo ti, jasno viđena.",
-    phoneSub:"nebo te već zna", phoneCard:"Karta dana", phoneCardSub:"jedno izvlačenje · nebo je odlučilo",
+    phoneSub:"nebo te već zna", phoneCard:"Karta dana · koreni",
+    phoneRead1:"Dan za povratak sebi, ne za dokazivanje.",
+    phoneRead2:"Nešto što si mislila da si izgubila i dalje je tu.",
+    phoneQuiet:"Ovo je današnja. Sutrašnja je druga i tvoja je.",
     g1:"koren", g2:"ljubav", g3:"put", g4:"razvoj", g5:"balans",
     featEyebrow:"šta te čeka", featTitle:"Mali dnevni ritual, sa pravom dubinom ispod.",
     f1h:"Karta dana", f1p:"Jedno izvlačenje dnevno: dam ti kratko, toplo čitanje onoga što ti dan nosi. Gradi niz, zapiši red u mesečev dnevnik.", f1t:"besplatno · svaki dan",
@@ -688,7 +701,10 @@ const L = {
     cap2p:"Präzise Positionen, uraltes Jyotish-Wissen, berechnet für deine genaue Minute und deinen Geburtsort.",
     cap3h:"…und mache daraus Worte, wie sie eine Freundin sagen würde.",
     cap3p:"Kein Jargon. Keine Planeten zum Entschlüsseln. Nur du, klar gesehen.",
-    phoneSub:"der Himmel kennt dich", phoneCard:"Karte des Tages", phoneCardSub:"ein Zug · der Himmel hat entschieden",
+    phoneSub:"der Himmel kennt dich", phoneCard:"Karte des Tages · Wurzeln",
+    phoneRead1:"Ein Tag, um zu dir zurückzukommen, nicht um dich zu beweisen.",
+    phoneRead2:"Etwas, das du verloren geglaubt hast, ist noch da.",
+    phoneQuiet:"Das ist die von heute. Die von morgen ist anders und sie gehört dir.",
     g1:"Wurzeln", g2:"Liebe", g3:"Weg", g4:"Wachstum", g5:"Balance",
     featEyebrow:"was dich erwartet", featTitle:"Ein kleines tägliches Ritual, mit echter Tiefe darunter.",
     f1h:"Karte des Tages", f1p:"Ein Zug pro Tag: ich gebe dir eine kurze, warme Lesung darüber, was dieser Tag für dich trägt. Halte deine Serie, schreib eine Zeile ins Mondtagebuch.", f1t:"kostenlos · jeden Tag",
