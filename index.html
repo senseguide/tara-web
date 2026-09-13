@@ -474,7 +474,8 @@
 <!-- WHAT AWAITS -->
 <section class="block" id="features">
   <div class="eyebrow rv" data-i18n="featEyebrow">what's inside</div>
-  <h2 class="title rv" data-i18n="featTitle">A small daily ritual, with real depth underneath.</h2>
+  <h2 class="title rv" data-i18n="featTitle">Built to be short.</h2>
+  <p class="lead rv" data-i18n="featLead">One card. One thought of your own. Then the day is yours.</p>
 
   <div class="group-label rv" data-i18n="featDailyLbl">every day</div>
   <div class="cards">
@@ -484,7 +485,7 @@
         <path d="M40 8 L40 20 M40 60 L40 72 M8 40 L20 40 M60 40 L72 40 M16 16 L24 24 M56 56 L64 64 M16 64 L24 56 M56 24 L64 16" stroke="var(--gold)" stroke-width="4" stroke-linecap="round"/>
       </svg>
       <h3 data-i18n="f1h">Card of the day</h3>
-      <p data-i18n="f1p">One draw each day: a short, warm reading of what this day carries for you. Keep a streak, jot a line in your moon journal.</p>
+      <p data-i18n="f1p">One draw each day: a short, warm reading of what this day carries for you. Keep a streak.</p>
       <span class="tag" data-i18n="f1t">free · every day</span>
     </div>
     <div class="card cyan rv">
@@ -508,6 +509,15 @@
       <h3 data-i18n="f4h">Look back</h3>
       <p data-i18n="f4p">Your last 30 days, read from the sky: where you moved with ease, where you needed more patience, and the theme running through it all.</p>
       <span class="tag" data-i18n="f4t">free · every month</span>
+    </div>
+    <div class="card pink rv">
+      <svg class="icon icon-sway" viewBox="0 0 80 80">
+        <path d="M22 58 L22 50 L52 20 L60 28 L30 58 Z" fill="none" stroke="var(--pink)" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M16 68 L64 68" stroke="var(--pink)" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <h3 data-i18n="f7h">Your own line</h3>
+      <p data-i18n="f7p">Next to each card, room for one thought of your own. After a few months, it reads back as a year of your mornings.</p>
+      <span class="tag" data-i18n="f7t">free · every day</span>
     </div>
   </div>
 
@@ -633,8 +643,10 @@ const L = {
     phoneRead2:"Something you thought you'd lost is still here.",
     phoneQuiet:"This is today's. Tomorrow's is different and it's yours.",
     g1:"roots", g2:"love", g3:"path", g4:"growth", g5:"balance",
-    featEyebrow:"what's inside", featTitle:"A small daily ritual, with real depth underneath.",
-    f1h:"Card of the day", f1p:"One draw each day: I give you a short, warm reading of what this day carries for you. Keep a streak, jot a line in your moon journal.", f1t:"free · every day",
+    featEyebrow:"what's inside", featTitle:"Built to be short.",
+    featLead:"One card. One thought of your own. Then the day is yours.",
+    f1h:"Card of the day", f1p:"One draw each day: I give you a short, warm reading of what this day carries for you. Keep a streak.", f1t:"free · every day",
+    f7h:"Your own line", f7p:"Next to each card, room for one thought of your own. After a few months, it reads back as a year of your mornings.", f7t:"free · every day",
     f2h:"The five gateways", f2p:"Love, work, roots, inner growth and balance: five fields of life, each with a deep personal reading written from your chart.", f2t:"one gate free daily",
     f3h:"Your chart", f3p:"For the curious: your full map is there too. Birth chart, navamsa and planetary periods. Real Vedic astronomy, beautifully drawn.", f3t:"for the curious",
     f4h:"Look back", f4p:"Your last 30 days, read from the sky: where you moved with ease, where you needed more patience, and the theme running through it all.", f4t:"every month",
@@ -675,8 +687,10 @@ const L = {
     phoneRead2:"Nešto što si mislila da si izgubila i dalje je tu.",
     phoneQuiet:"Ovo je današnja. Sutrašnja je druga i tvoja je.",
     g1:"koren", g2:"ljubav", g3:"put", g4:"razvoj", g5:"balans",
-    featEyebrow:"šta te čeka", featTitle:"Mali dnevni ritual, sa pravom dubinom ispod.",
-    f1h:"Karta dana", f1p:"Jedno izvlačenje dnevno: dam ti kratko, toplo čitanje onoga što ti dan nosi. Gradi niz, zapiši red u mesečev dnevnik.", f1t:"besplatno · svaki dan",
+    featEyebrow:"šta te čeka", featTitle:"Napravljena da bude kratka.",
+    featLead:"Jedna karta. Jedna tvoja misao. Onda je dan tvoj.",
+    f1h:"Karta dana", f1p:"Jedno izvlačenje dnevno: dam ti kratko, toplo čitanje onoga što ti dan nosi. Gradi niz.", f1t:"besplatno · svaki dan",
+    f7h:"Tvoja rečenica", f7p:"Uz svaku kartu ostaje mesto za jednu tvoju misao. Posle nekoliko meseci to se čita kao godina tvojih jutara.", f7t:"besplatno · svaki dan",
     f2h:"Pet kapija", f2p:"Ljubav, posao, koren, unutrašnji razvoj i balans: pet polja života, svako sa dubinskim ličnim čitanjem iz tvoje karte.", f2t:"jedna kapija besplatna dnevno",
     f3h:"Tvoja karta", f3p:"Za radoznale: cela mapa je tu. Natalna karta, navamša i planetarni periodi. Prava vedska astronomija, lepo nacrtana.", f3t:"za radoznale",
     f4h:"Osvrt unazad", f4p:"Poslednjih 30 dana, pročitanih iz neba: gde ti je išlo naruku, gde je trebalo više strpljenja, i tema koja se provlačila kroz sve to.", f4t:"svakog meseca",
@@ -717,8 +731,10 @@ const L = {
     phoneRead2:"Etwas, das du verloren geglaubt hast, ist noch da.",
     phoneQuiet:"Das ist die von heute. Die von morgen ist anders und sie gehört dir.",
     g1:"Wurzeln", g2:"Liebe", g3:"Weg", g4:"Wachstum", g5:"Balance",
-    featEyebrow:"was dich erwartet", featTitle:"Ein kleines tägliches Ritual, mit echter Tiefe darunter.",
-    f1h:"Karte des Tages", f1p:"Ein Zug pro Tag: ich gebe dir eine kurze, warme Lesung darüber, was dieser Tag für dich trägt. Halte deine Serie, schreib eine Zeile ins Mondtagebuch.", f1t:"kostenlos · jeden Tag",
+    featEyebrow:"was dich erwartet", featTitle:"Kurz gebaut.",
+    featLead:"Eine Karte. Ein eigener Gedanke. Dann gehört der Tag dir.",
+    f1h:"Karte des Tages", f1p:"Ein Zug pro Tag: ich gebe dir eine kurze, warme Lesung darüber, was dieser Tag für dich trägt. Halte deine Serie.", f1t:"kostenlos · jeden Tag",
+    f7h:"Deine eigene Zeile", f7p:"Neben jeder Karte bleibt Platz für einen eigenen Gedanken. Nach ein paar Monaten liest sich das wie ein Jahr deiner Morgen.", f7t:"kostenlos · jeden Tag",
     f2h:"Die fünf Tore", f2p:"Liebe, Arbeit, Wurzeln, inneres Wachstum und Balance: fünf Lebensfelder, jedes mit einer tiefen persönlichen Lesung aus deinem Horoskop.", f2t:"ein Tor täglich frei",
     f3h:"Dein Horoskop", f3p:"Für Neugierige: die ganze Karte ist auch da. Geburtshoroskop, Navamsha und Planetenperioden. Echte vedische Astronomie, schön gezeichnet.", f3t:"für Neugierige",
     f4h:"Rückblick", f4p:"Deine letzten 30 Tage, aus dem Himmel gelesen: wo es leicht ging, wo mehr Geduld nötig war, und das Thema, das sich durchzog.", f4t:"jeden Monat",
