@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TĀRĀ · the sky knows you</title>
-<meta name="description" content="I'm Tara. Every day I write you a reading from your real birth chart — precise, clear, only yours.">
+<meta name="description" content="I'm Tara. Every day I write you a reading from your real birth chart. Precise, clear, only yours.">
 <meta property="og:title" content="TĀRĀ · the sky knows you">
-<meta property="og:description" content="I'm Tara. Every day I write you a reading from your real birth chart — precise, clear, only yours.">
+<meta property="og:description" content="I'm Tara. Every day I write you a reading from your real birth chart. Precise, clear, only yours.">
 <!-- Absolute URL: WhatsApp, iMessage and X will not fetch a relative one, so
      shared links showed no preview image at all. -->
 <meta property="og:image" content="https://dailytara.com/og-image.png">
@@ -21,7 +21,7 @@
      shows it whole. Swap to summary_large_image if a 1200x630 art is made. -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TĀRĀ · the sky knows you">
-<meta name="twitter:description" content="I'm Tara. Every day I write you a reading from your real birth chart — precise, clear, only yours.">
+<meta name="twitter:description" content="I'm Tara. Every day I write you a reading from your real birth chart. Precise, clear, only yours.">
 <meta name="twitter:image" content="https://dailytara.com/og-image.png">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,35 +59,18 @@
     text-shadow:0 0 22px rgba(242,176,53,.55); text-decoration:none;
   }
   .head-right{display:flex; align-items:center; gap:12px}
-  /* One language showing, the rest a tap away. All three side by side ate the
-     width the "open the app" button needed, and that button was being hidden on
-     phones to make room, which left a phone with no way in above the fold. */
-  .langs{position:relative}
+  /* All three side by side. The collapsed picker repeated the current language,
+     once in the chip and once in the list, so EN read twice. Kept narrow enough
+     that the way into the app still fits next to it on a phone. */
+  .langs{display:flex; align-items:center; gap:2px}
   .langs button{
     font-family:var(--mono); font-size:11px; letter-spacing:.08em;
-    background:none; border:none; color:var(--muted); cursor:pointer; transition:color .2s;
+    background:none; border:none; color:var(--muted); cursor:pointer;
+    padding:7px 6px; transition:color .2s;
   }
-  .langs .lang-now{
-    display:flex; align-items:center; gap:5px; padding:7px 11px;
-    border:1.5px solid var(--border); border-radius:99px; color:var(--gold);
-  }
-  .langs .lang-now::after{
-    content:""; width:0; height:0; border-left:3.5px solid transparent;
-    border-right:3.5px solid transparent; border-top:4px solid currentColor;
-    opacity:.75; transition:transform .2s;
-  }
-  .langs.open .lang-now::after{transform:rotate(180deg)}
-  .lang-menu{
-    position:absolute; top:calc(100% + 8px); right:0; z-index:60;
-    display:none; flex-direction:column; min-width:72px; overflow:hidden;
-    border:1.5px solid var(--border); border-radius:12px;
-    background:rgba(13,16,51,.96);
-    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
-  }
-  .langs.open .lang-menu{display:flex}
-  .lang-menu button{padding:9px 14px; text-align:left}
-  .lang-menu button.on{color:var(--gold)}
-  .lang-menu button:hover{color:var(--text)}
+  .langs button.on{color:var(--gold)}
+  .langs button:hover{color:var(--text)}
+
   .cta, .cta:visited{
     font-family:var(--body); font-weight:700; font-size:13.5px; text-decoration:none;
     color:var(--gold); border:2px solid var(--gold); border-radius:99px;
@@ -364,12 +347,9 @@
   <a class="wordmark" href="#hero">TĀRĀ</a>
   <div class="head-right">
     <nav class="langs" id="langs" aria-label="Language">
-      <button class="lang-now" id="langNow" aria-haspopup="true" aria-expanded="false">EN</button>
-      <div class="lang-menu" id="langMenu">
-        <button data-lang="sr">SR</button>
-        <button data-lang="en">EN</button>
-        <button data-lang="de">DE</button>
-      </div>
+      <button data-lang="sr">SR</button>
+      <button data-lang="en">EN</button>
+      <button data-lang="de">DE</button>
     </nav>
     <a class="cta" href="https://app.dailytara.com"><span class="full" data-i18n="try">Try TĀRĀ free</span><span class="short" data-i18n="tryShort">Open</span></a>
   </div>
@@ -785,8 +765,7 @@ function applyLang(l) {
       if (key === "finalH") el.innerHTML = dict[key]; else el.textContent = dict[key];
     }
   });
-  document.querySelectorAll(".lang-menu button").forEach(b => b.classList.toggle("on", b.dataset.lang === l));
-  document.getElementById("langNow").firstChild.nodeValue = l.toUpperCase();
+  document.querySelectorAll("#langs button").forEach(b => b.classList.toggle("on", b.dataset.lang === l));
   // Carry the chosen language into the app so it opens in the same language.
   // Built with URL rather than by rewriting the whole href: an invite arrives as
   // ?i=CODE and is appended to these same links, and rebuilding the address from
@@ -798,19 +777,9 @@ function applyLang(l) {
   });
   restartType(dict.typeLine);
 }
-const langsEl = document.getElementById("langs");
-const langNow = document.getElementById("langNow");
-function closeLangs(){ langsEl.classList.remove("open"); langNow.setAttribute("aria-expanded", "false"); }
-langNow.addEventListener("click", e => {
-  e.stopPropagation();
-  const open = langsEl.classList.toggle("open");
-  langNow.setAttribute("aria-expanded", String(open));
-});
-document.querySelectorAll(".lang-menu button").forEach(b =>
-  b.addEventListener("click", () => { applyLang(b.dataset.lang); closeLangs(); })
+document.querySelectorAll("#langs button").forEach(b =>
+  b.addEventListener("click", () => applyLang(b.dataset.lang))
 );
-document.addEventListener("click", e => { if (!langsEl.contains(e.target)) closeLangs(); });
-document.addEventListener("keydown", e => { if (e.key === "Escape") closeLangs(); });
 
 /* ================= typewriter ================= */
 const typeEl = document.getElementById("type");
