@@ -337,7 +337,11 @@
   .rv{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease}
   .rv.in{opacity:1; transform:none}
 
-  .journey-cta{ text-align:center; margin:22px auto 72px; }
+  .journey-cta{ text-align:center; margin:22px auto 40px; }
+  .lore-link{ max-width:1060px; margin:0 auto 72px; padding:0 24px; text-align:center; font-size:15px; }
+  .lore-link a{ color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(242,176,53,.35); padding-bottom:2px; transition:border-color .2s; }
+  .lore-link a:hover{ border-color:var(--gold); }
+  .lore-link .arrow{ color:var(--gold); margin-left:7px; }
   /* said quietly: no frame, no icon, just the line */
   .one-card{ max-width:46ch; margin:8px auto 0; padding:0 24px; text-align:center;
     font-size:13.5px; line-height:1.6; color:var(--muted); }
@@ -460,16 +464,9 @@
   <a class="cta big fill" data-i18n="tryBig" href="https://app.dailytara.com">Open TĀRĀ, it's free</a>
 </div>
 
-<!-- LORE: Jyotish vs Western -->
-<section class="block" id="lore">
-  <div class="eyebrow rv" data-i18n="loreEyebrow">ancient tradition · real astronomy</div>
-  <h2 class="title rv" data-i18n="loreTitle">This isn't the horoscope you know.</h2>
-  <p class="lead rv" data-i18n="loreP1">Jyotish is Vedic astrology, thousands of years old, a science of light and time developed by Indian sages who observed the same stars you see tonight. It isn't a generic daily horoscope divided into twelve types. It is a precise system, built over centuries and practiced around the world.</p>
-  <p class="lead lore-q rv" data-i18n="loreQ">How is it different from the astrology you grew up with?</p>
-  <p class="lead rv" data-i18n="loreP2">Western astrology tracks the seasons, anchoring your sign to the calendar. Jyotish tracks the actual stars: the sky's real astronomical positions at the exact moment you were born. And where Western astrology centers on the Sun, Jyotish grounds itself in the Moon and your Janma Nakshatra, the precise imprint carried from your very first breath.</p>
-  <p class="lead rv" data-i18n="loreP3">Unique to Jyotish are the Dashas: time cycles that divide your life into distinct chapters, each ruled by a different planet. A precise mathematical framework, refined over thousands of years.</p>
-  <p class="lore-close rv" data-i18n="loreClose">Same sky. Read deeper.</p>
-</section>
+<!-- Where the Jyotish section used to be: whoever wants the why can go and
+     read it at the bottom, the rest of the page no longer has to. -->
+<p class="lore-link rv"><a href="#lore" data-i18n="loreLink">Why Vedic, and not the astrology you grew up with</a><span class="arrow" aria-hidden="true">→</span></p>
 
 <!-- WHAT AWAITS -->
 <section class="block" id="features">
@@ -585,7 +582,7 @@
         <circle cx="30" cy="36" r="3" fill="var(--pink)"/><circle cx="40" cy="36" r="3" fill="var(--pink)"/><circle cx="50" cy="36" r="3" fill="var(--pink)"/>
       </svg>
       <h3 data-i18n="s3h">You get words, not symbols</h3>
-      <p data-i18n="s3p">Every reading is written for you like a wise friend would speak: concrete, kind and about your life, not the sky's.</p>
+      <p data-i18n="s3p">Every reading is written for you like a wise friend would speak: concrete, kind and about your life, not the sky's. Every reading shows what it was read from. Nothing is hidden behind mystique.</p>
     </div>
   </div>
 </section>
@@ -608,6 +605,17 @@
   <h2 class="emerge" data-i18n="finalH">The sky already knows you.<br>Come meet it.</h2>
   <p class="rv" data-i18n="finalP">Free to try. Works in your browser, right now.</p>
   <a class="cta big fill rv" data-i18n="finalCta" href="https://app.dailytara.com">Open TĀRĀ</a>
+</section>
+
+<!-- LORE: Jyotish vs Western. Moved to the bottom of the page. -->
+<section class="block" id="lore">
+  <div class="eyebrow rv" data-i18n="loreEyebrow">ancient tradition · real astronomy</div>
+  <h2 class="title rv" data-i18n="loreTitle">This isn't the horoscope you know.</h2>
+  <p class="lead rv" data-i18n="loreP1">Jyotish is Vedic astrology, thousands of years old, a science of light and time developed by Indian sages who observed the same stars you see tonight. It isn't a generic daily horoscope divided into twelve types. It is a precise system, built over centuries and practiced around the world.</p>
+  <p class="lead lore-q rv" data-i18n="loreQ">How is it different from the astrology you grew up with?</p>
+  <p class="lead rv" data-i18n="loreP2">Western astrology tracks the seasons, anchoring your sign to the calendar. Jyotish tracks the actual stars: the sky's real astronomical positions at the exact moment you were born. And where Western astrology centers on the Sun, Jyotish grounds itself in the Moon and your Janma Nakshatra, the precise imprint carried from your very first breath.</p>
+  <p class="lead rv" data-i18n="loreP3">Unique to Jyotish are the Dashas: time cycles that divide your life into distinct chapters, each ruled by a different planet. A precise mathematical framework, refined over thousands of years.</p>
+  <p class="lore-close rv" data-i18n="loreClose">Same sky. Read deeper.</p>
 </section>
 
 <footer>
@@ -659,10 +667,11 @@ const L = {
     loreP2:"Western astrology tracks the seasons, anchoring your sign to the calendar. Jyotish tracks the actual stars: the sky's real astronomical positions at the exact moment you were born. And where Western astrology centers on the Sun, Jyotish grounds itself in the Moon and your Janma Nakshatra, the precise imprint carried from your very first breath.",
     loreP3:"Unique to Jyotish are the Dashas: time cycles that divide your life into distinct chapters, each ruled by a different planet. A precise mathematical framework, refined over thousands of years.",
     loreClose:"Same sky. Read deeper.",
+    loreLink:"Why Vedic, and not the astrology you grew up with",
     howEyebrow:"how it works", howTitle:"Three steps, then the sky does the talking.",
     s1h:"Tell me when you arrived", s1p:"Date, time and place of birth. Don't know the exact time? I'll read from the Moon instead. It still works.",
     s2h:"I compute your sky", s2p:"A real ephemeris finds where everything stood at your first breath, the same math astronomers use.",
-    s3h:"You get words, not symbols", s3p:"I write every reading for you like a wise friend would speak: concrete, kind, about your life.",
+    s3h:"You get words, not symbols", s3p:"I write every reading for you like a wise friend would speak: concrete, kind, about your life. Every reading shows what it was read from. Nothing is hidden behind mystique.",
     plusP:"TĀRĀ+ opens the deeper readings: all five gateways, your monthly look-back, your life chapters and more. New words as the sky keeps moving.",
     plusPrice:"€4.99 / month · €39.99 / year", plusCta:"Start free",
     finalH:"The sky already knows you.<br>Come meet it.", finalP:"Free to try. Works in your browser, right now.", finalCta:"Open TĀRĀ",
@@ -703,10 +712,11 @@ const L = {
     loreP2:"Zapadna astrologija prati godišnja doba, vezujući tvoj znak za kalendar. Džjotiš prati stvarne zvezde: prave astronomske pozicije neba u tačnom trenutku tvog rođenja. I dok se zapadna astrologija okreće oko Sunca, džjotiš se oslanja na Mesec i tvoju janma nakšatru, tačan otisak koji nosiš od prvog daha.",
     loreP3:"Jedinstvene za džjotiš su daše: vremenski ciklusi koji tvoj život dele na jasna poglavlja, svako vođeno drugom planetom. Precizan matematički okvir, usavršavan hiljadama godina.",
     loreClose:"Isto nebo. Samo dublje pročitano.",
+    loreLink:"Zašto vedska, a ne astrologija na koju si navikla",
     howEyebrow:"kako radi", howTitle:"Tri koraka, a onda nebo priča.",
     s1h:"Reci mi kad si stigla na svet", s1p:"Datum, vreme i mesto rođenja. Ne znaš tačno vreme? Čitaću iz Meseca. I dalje radi.",
     s2h:"Izračunaću tvoje nebo", s2p:"Prava efemerida nađe gde je sve stajalo pri tvom prvom udahu, ista matematika koju koriste astronomi.",
-    s3h:"Dobićeš reči, ne simbole", s3p:"Svako čitanje ti pišem kao što bi ti rekla mudra drugarica: konkretno, s ljubavlju, o tvom životu.",
+    s3h:"Dobićeš reči, ne simbole", s3p:"Svako čitanje ti pišem kao što bi ti rekla mudra drugarica: konkretno, s ljubavlju, o tvom životu. Uz svako čitanje piše iz čega je pročitano. Ništa nije skriveno iza mistike.",
     plusP:"TĀRĀ+ otvara dublja čitanja: svih pet kapija, tvoj mesečni osvrt, poglavlja tvog života i još. Nove reči kako se nebo pomera.",
     plusPrice:"4,99 € / mesečno · 39,99 € / godišnje", plusCta:"Počni besplatno",
     finalH:"Nebo te već zna.<br>Dođi da ga upoznaš.", finalP:"Besplatno za probu. Radi u tvom browseru, odmah.", finalCta:"Otvori TARU",
@@ -747,10 +757,11 @@ const L = {
     loreP2:"Die westliche Astrologie folgt den Jahreszeiten und bindet dein Zeichen an den Kalender. Jyotish folgt den echten Sternen: den tatsächlichen astronomischen Positionen des Himmels im genauen Moment deiner Geburt. Und während sich die westliche Astrologie um die Sonne dreht, gründet sich Jyotish auf den Mond und deine Janma-Nakshatra, den genauen Abdruck, den du seit deinem ersten Atemzug trägst.",
     loreP3:"Einzigartig für Jyotish sind die Dashas: Zeitzyklen, die dein Leben in klare Kapitel teilen, jedes von einem anderen Planeten geführt. Ein präzises mathematisches Gerüst, über Jahrtausende verfeinert.",
     loreClose:"Derselbe Himmel. Nur tiefer gelesen.",
+    loreLink:"Warum vedisch, und nicht die Astrologie, mit der du aufgewachsen bist",
     howEyebrow:"so funktioniert es", howTitle:"Drei Schritte, dann spricht der Himmel.",
     s1h:"Sag mir, wann du ankamst", s1p:"Datum, Zeit und Ort deiner Geburt. Genaue Zeit unbekannt? Dann lese ich vom Mond. Es funktioniert trotzdem.",
     s2h:"Ich berechne deinen Himmel", s2p:"Eine echte Ephemeride findet, wo alles bei deinem ersten Atemzug stand, dieselbe Mathematik, die Astronomen nutzen.",
-    s3h:"Du bekommst Worte, keine Symbole", s3p:"Jede Lesung schreibe ich für dich, wie eine weise Freundin sprechen würde: konkret, freundlich, über dein Leben.",
+    s3h:"Du bekommst Worte, keine Symbole", s3p:"Jede Lesung schreibe ich für dich, wie eine weise Freundin sprechen würde: konkret, freundlich, über dein Leben. Bei jeder Lesung steht, woraus sie gelesen wurde. Nichts versteckt sich hinter Mystik.",
     plusP:"TĀRĀ+ öffnet die tieferen Lesungen: alle fünf Tore, deinen monatlichen Rückblick, deine Lebenskapitel und mehr. Neue Worte, während der Himmel weiterzieht.",
     plusPrice:"4,99 € / Monat · 39,99 € / Jahr", plusCta:"Kostenlos starten",
     finalH:"Der Himmel kennt dich schon.<br>Komm und triff ihn.", finalP:"Kostenlos ausprobieren. Läuft in deinem Browser, sofort.", finalCta:"TĀRĀ öffnen",
